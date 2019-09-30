@@ -401,6 +401,12 @@ html:not(.js) .navbar-default .dropdown:focus > a .navbar-nav__icon, html:not(.j
   fill: #ffc142;
 }
 
+.course__navigation .course_nav-title,
+.course__navigation .course_nav-toggle,
+.course__navigation .course_dividing-line {
+  color: #29abe2;
+}
+
 @media (min-width: 900px) {
   .search-take-over .form-text {
     color: #ffffff;
