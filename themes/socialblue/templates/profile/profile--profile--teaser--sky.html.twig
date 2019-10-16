@@ -1,7 +1,8 @@
 {{ attach_library('socialbase/teaser') }}
 {{ attach_library('socialblue/teaser--sky') }}
+{{ attach_library('ctbto_core/ctbto_core.teaser') }}
 
-<div class="card teaser">
+<div class="card teaser teaser__profile">
   <a href="{{ profile_stream_url }}" class="teaser__image">
     {% if content.field_profile_image %}
       {{ content.field_profile_image }}
@@ -14,17 +15,39 @@
           {{ profile_name }} {{ profile_name_extra }}
         </a>
       </h4>
-      {% if content.field_profile_function|render or content.field_profile_organization|render %}
+      {% if content.field_nationality|render %}
         <div class="teaser__content-line">
           <span class="teaser__content-text">
-            {% if content.field_profile_organization|render %}
-              {{ '@function at @organization'|t({'@function': content.field_profile_function|render, '@organization': content.field_profile_organization|render}) }}
-            {% else %}
-              {{ content.field_profile_function }}
-            {% endif %}
+            {{ content.field_nationality }}
           </span>
         </div>
       {% endif %}
+
+      <div class="teaser__content-group">
+
+        {% if content.field_university_or_institution_|render %}
+          <div class="teaser__content-line">
+            <svg class="teaser__content-type-icon">
+              <use xlink:href="#icon-university"></use>
+            </svg>
+            <span class="teaser__content-text">
+              {{ content.field_university_or_institution_.0 }}
+          </span>
+          </div>
+        {% endif %}
+
+        {% if content.field_main_course_of_study|render %}
+          <div class="teaser__content-line">
+            <svg class="teaser__content-type-icon">
+              <use xlink:href="#icon-study"></use>
+            </svg>
+            <span class="teaser__content-text">
+              {{ content.field_main_course_of_study.0 }}
+          </span>
+          </div>
+        {% endif %}
+
+      </div>
 
       {% if content.field_profile_profile_tag['#items'] or badges %}
         <div style="margin-left: 30px; margin-top: 5px;">
@@ -41,13 +64,12 @@
     </div>
 
     <div class="card__actionbar">
-      <div class="teaser__tag">
-        {% trans %}Member{% endtrans %}
-      </div>
       <div class="card__link">
-        <a href="{{ profile_info_url }}" class="btn btn-default waves-effect waves-btn">
-          {% trans %}View profile{% endtrans %}
-        </a>
+        {% if profile_contact_url %}
+          <a href="{{ profile_contact_url }}" class="btn btn-default waves-effect waves-btn">
+            {% trans %}Send Message{% endtrans %}
+          </a>
+        {% endif %}
       </div>
     </div>
   </div>

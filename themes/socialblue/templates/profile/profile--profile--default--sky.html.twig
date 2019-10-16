@@ -1,105 +1,192 @@
 <div class="card">
   <div class="card__body">
-    <h3>{% trans %}Information{% endtrans %}</h3>
-
-    {% if content.field_profile_self_introduction|render %}
-      <div class="user-info__item">
-        <h5>{% trans %}Self introduction{% endtrans %}</h5>
-        <div class="user-info__wrapper">
-          {{ content.field_profile_self_introduction }}
-        </div>
-      </div>
+    {% if (content.field_profile_phone_number|render or user_mail or content.field_profile_address|render) %}
+      <h4>{% trans %}Contact information{% endtrans %}</h4>
     {% endif %}
 
     {% if content.field_profile_phone_number|render %}
-      <div class="list-item list-item--withlabel user-info__item">
+      <div class="list-item list-item--withlabel">
         <div class="list-item__label">{% trans %}Phone{% endtrans %}</div>
         <div class="list-item__text">{{ content.field_profile_phone_number }}</div>
       </div>
     {% endif %}
 
     {% if user_mail %}
-      <div class="list-item list-item--withlabel user-info__item">
+      <div class="list-item list-item--withlabel">
         <div class="list-item__label">{% trans %}E-mail{% endtrans %}</div>
         <div class="list-item__text">{{ user_mail }}</a></div>
       </div>
     {% endif %}
 
-    {% if content.field_profile_challenge_area['#items'] %}
-      <div class="user-info__item">
-        <h5>{% trans %}Challenge area{% endtrans %}</h5>
-        <div class="user-info__wrapper">
-          {% for item in content.field_profile_challenge_area['#items'] %}
-            <div class="badge badge--pill badge--large badge-default">{{ item.entity.label }}</div>
-          {% endfor %}
+    {% if content.field_profile_address|render %}
+      <div class="list-item list-item--withlabel">
+        <div class="list-item__label">{% trans %}Address{% endtrans %}</div>
+        <div class="list-item__text">
+          {{ content.field_profile_address }}
         </div>
       </div>
     {% endif %}
 
-    {% if content.field_profile_constituency['#items'] %}
-      <div class="user-info__item">
-        <h5>{% trans %}Сonstituency{% endtrans %}</h5>
-        <div class="user-info__wrapper">
-          {% for item in content.field_profile_constituency['#items'] %}
-            <div class="badge badge--pill badge--large badge-default">{{ item.entity.label }}</div>
-          {% endfor %}
-        </div>
-      </div>
-    {% endif %}
 
-    {% if content.field_profile_country_region['#items'] %}
-      <div class="user-info__item">
-        <h5>{% trans %}Country & Region{% endtrans %}</h5>
-        <div class="user-info__wrapper">
-          {% for item in content.field_profile_country_region['#items'] %}
-            <div class="badge badge--pill badge--large badge-default">{{ item.entity.label }}</div>
-          {% endfor %}
-        </div>
-      </div>
-    {% endif %}
-
-    {% if content.field_profile_organisation['#items'] %}
-      <div class="user-info__item">
-        <h5>{% trans %}Organisation{% endtrans %}</h5>
-        <div class="user-info__wrapper">
-          {% for item in content.field_profile_organisation['#items'] %}
-            <div class="badge badge--pill badge--large badge-default">{{ item.entity.label }}</div>
-          {% endfor %}
-        </div>
-      </div>
-    {% endif %}
-
-    {% if content.field_profile_languages['#items'] %}
-      <div class="user-info__item">
-        <h5>{% trans %}Languages{% endtrans %}</h5>
-        <div class="user-info__wrapper">
-          {% for item in content.field_profile_languages['#items'] %}
-            <div class="badge badge--pill badge--large badge-default">{{ item.entity.label }}</div>
-          {% endfor %}
-        </div>
-      </div>
-    {% endif %}
-
-    {% if content.field_profile_expertise['#items'] %}
-      <div class="user-info__item">
-        <h5>{% trans %}Expertise{% endtrans %}</h5>
-        <div class="user-info__wrapper">
-          {% for item in content.field_profile_expertise['#items'] %}
-            <div class="badge badge--pill badge--large badge-default">{{ item.entity.label }}</div>
-          {% endfor %}
-        </div>
-      </div>
+    {% if content.field_profile_self_introduction|render %}
+      <h5>{% trans %}Intro{% endtrans %}</h5>
+      {{ content.field_profile_self_introduction }}
     {% endif %}
 
     {% if content.field_profile_interests['#items'] %}
-      <div class="user-info__item">
-        <h5>{% trans %}Interests{% endtrans %}</h5>
-        <div class="user-info__wrapper">
-          {% for item in content.field_profile_interests['#items'] %}
-            <div class="badge badge--pill badge--large badge-default">{{ item.entity.label }}</div>
-          {% endfor %}
-        </div>
-      </div>
+      <h5>{% trans %}Your interests{% endtrans %}</h5>
+      {% for item in content.field_profile_interests['#items'] %}
+        <div class="badge badge--pill badge--large badge-default">{{ item.entity.label }}</div>
+      {% endfor %}
+    {% endif %}
+
+    {% if content.field_profile_expertise['#items'] %}
+      <h5>{% trans %}Your expertise{% endtrans %}</h5>
+      {% for item in content.field_profile_expertise['#items'] %}
+        <div class="badge badge--pill badge--large badge-default">{{ item.entity.label }}</div>
+      {% endfor %}
+    {% endif %}
+
+    {% if content.field_profile_profile_tag['#items'] %}
+      <h5>{% trans %}Profile tags{% endtrans %}</h5>
+      {% for item in content.field_profile_profile_tag['#items'] %}
+        <div class="badge badge--pill badge--large badge-default">{{ item.entity.label }}</div>
+      {% endfor %}
+    {% endif %}
+
+    {# Personal information section #}
+    {% if (content|render is not empty) %}
+      <h4>{% trans %}Personal Information{% endtrans %}</h4>
+    {% endif %}
+
+    {% if content.field_profile_first_name|render and content.field_profile_last_name|render%}
+      <h5>Name</h5>
+      {{ content.field_profile_first_name }} {{ content.field_profile_last_name }}
+    {% endif %}
+
+    {% if (content.field_affiliation|render) %}
+      <h5>Affiliation</h5>
+      {{ content.field_affiliation }}
+    {% endif %}
+
+    {% if (content.field_current_city|render) %}
+      <h5>Current City</h5>
+      {{ content.field_current_city }}
+    {% endif %}
+
+    {% if (content.field_nationality|render) %}
+      <h5>Nationality</h5>
+      {{ content.field_nationality }}
+    {% endif %}
+
+    {% if (content.field_additional_nationality|render) %}
+      <h5>Additional Nationalities</h5>
+      {% for item in content.field_additional_nationality['#items'] %}
+        <div class="badge badge--pill badge--large badge-default">{{ item.value }}</div>
+      {% endfor %}
+    {% endif %}
+
+    {% if (content.field_country_of_residence|render) %}
+      <h5>Country of Residence</h5>
+      {{ content.field_country_of_residence }}
+    {% endif %}
+
+    {# Projects section #}
+    {% if (content|render is not empty) %}
+      <h4>{% trans %}Youth Group Projects{% endtrans %}</h4>
+    {% endif %}
+
+    {% if (content.field_youth_group_project_area_i|render) %}
+      <h5>Youth Group Project Area Interest</h5>
+      {% for item in content.field_youth_group_project_area_i['#items'] %}
+        <div class="badge badge--pill badge--large badge-default">{{ item.value }}</div>
+      {% endfor %}
+    {% endif %}
+
+    {# Education section #}
+    {% if (content|render is not empty) %}
+      <h4>{% trans %}Education{% endtrans %}</h4>
+    {% endif %}
+
+    {% if (content.field_university_or_institution_|render) %}
+      <h5>University or Institution of Highest Education</h5>
+      {{ content.field_university_or_institution_}}
+    {% endif %}
+
+    {% if (content.field_academic_discipline|render) %}
+      <h5>Academic Discipline</h5>
+      {{ content.field_academic_discipline}}
+    {% endif %}
+
+    {% if (content.field_main_course_of_study|render) %}
+      <h5>Degree or Area of Study</h5>
+      {{ content.field_main_course_of_study}}
+    {% endif %}
+
+    {% if (content.field_graduation_year|render) %}
+      <h5>Graduation Year</h5>
+      {{ content.field_graduation_year}}
+    {% endif %}
+
+    {# Professional Experience section #}
+    {% if (content|render is not empty and content.field_experience_you_wish_to_hig|render) %}
+      <h4>{% trans %}Professional Experience{% endtrans %}</h4>
+    {% endif %}
+
+    {% if (content.field_experience_you_wish_to_hig|render) %}
+      <h5>Experience you wish to highlight</h5>
+      {{ content.field_experience_you_wish_to_hig}}
+    {% endif %}
+
+    {# Social section #}
+    {% if (content.field_twitter|render or content.field_website|render or content.field_facebook|render or content.field_instagram|render or content.field_skype_id|render or content.field_linkedin|render) %}
+      <h4>{% trans %}Social{% endtrans %}</h4>
+    {% endif %}
+
+    {% if (content.field_twitter|render) %}
+      <h5><i class="fab fa-twitter"></i> Twitter</h5>
+      <a href="{{ content.field_twitter[0]['#url'] }}">Twitter</a>
+    {% endif %}
+
+    {% if (content.field_website|render) %}
+      <h5><i class="fa fal fa-globe"></i> Website</h5>
+      <a href="{{ content.field_website[0]['#url'] }}">Website</a>
+    {% endif %}
+
+    {% if (content.field_facebook|render) %}
+      <h5><i class="fab fa-facebook"></i> Facebook</h5>
+      <a href="{{ content.field_facebook[0]['#url'] }}">Facebook</a>
+    {% endif %}
+
+    {% if (content.field_instagram|render) %}
+      <h5><i class="fab fa-instagram"></i> Instagram</h5>
+      <a href="{{ content.field_instagram[0]['#url'] }}">Instagram</a>
+    {% endif %}
+
+    {% if (content.field_skype_id|render) %}
+      <h5><i class="fab fa-skype"></i> Skype</h5>
+      {{ content.field_skype_id}}
+    {% endif %}
+
+    {% if (content.field_linkedin|render) %}
+      <h5><i class="fab fa-linkedin"></i> LinkedIn</h5>
+      <a href="{{ content.field_linkedin[0]['#url'] }}">Linkedin</a>
+    {% endif %}
+
+    {# Misc section #}
+    <h4>{% trans %}Miscellaneous{% endtrans %}</h4>
+
+    {% if (content.badges|render) %}
+      {{ content.badges}}
+    {% endif %}
+
+    {# Agreement #}
+    {%  if is_admin %}
+      {% set agreed = 'NOT ' %}
+      {% if (content.field_consent|render) %}
+        {% set agreed = '' %}
+      {% endif %}
+      {{ 'This member has '}} <span style="font-weight: bold"> {{ agreed }} </span> {{  'agreed to the code of conduct and the membership guidelines.' }}
     {% endif %}
 
     {% if content.field_profile_profile_tag['#items'] %}
