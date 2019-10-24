@@ -11,3 +11,30 @@
 function social_advanced_image_page_attachments(array &$attachments) {
   $attachments['#attached']['library'][] = 'social_advanced_image/attribute.copyright';
 }
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function social_advanced_image_form_editor_image_dialog_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $x = $form;
+
+  $form['attributes']['copyright'] = [
+    '#type' => 'textfield',
+    '#title' => t('Copyright text'),
+    '#description' => t('The copyright attribute is used as a tooltip when the mouse hovers over the image.'),
+    '#maxlength' => 1024,
+  ];
+
+
+
+//  $element['copyright'] = [
+//    '#default_value' => isset($item['copyright']) ? $item['copyright'] : '',
+//    '#weight' => -10,
+//    '#access' => (bool) $item['fids'] && $element['#image_copyright_field'],
+//    '#required' => $element['#image_copyright_field_required'],
+//    '#element_validate' => $element['#image_copyright_field_required'] == 1 ? [[get_called_class(), 'validateRequiredFields']] : [],
+//  ];
+}
+
+
