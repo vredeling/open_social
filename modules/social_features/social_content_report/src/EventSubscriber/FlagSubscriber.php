@@ -92,16 +92,18 @@ class FlagSubscriber implements EventSubscriberInterface {
    */
   public function onFlag(FlaggingEvent $event) {
     $flagging = $event->getFlagging();
+    // Retrieve the entity.
+    $entity = $flagging->getFlaggable();
+    $entity_type = $entity->getEntityTypeId();
+    $entity_id = $entity->id();
 
     if (!in_array($flagging->getFlagId(), $this->socialContentReport->getReportFlagTypes())) {
+      // we want to invalide caches anyhow due to issue in flag:
+      // https://www.drupal.org/project/flag/issues/2568131
+      $this->cacheInvalidator->invalidateTags([$entity_type . ':' . $entity_id]);
       return;
     }
 
-    // Retrieve the entity.
-    $entity = $flagging->getFlaggable();
-
-    $entity_type = $entity->getEntityTypeId();
-    $entity_id = $entity->id();
     $invalidated = FALSE;
 
     // Do nothing unless we need to unpublish the entity immediately.

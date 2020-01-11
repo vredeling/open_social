@@ -5,10 +5,17 @@
  * The Social Content Report module file.
  */
 
+use Drupal\activity_creator\Entity\Activity;
 use Drupal\comment\CommentInterface;
+use Drupal\Core\Access\AccessResultForbidden;
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\message\Entity\Message;
 use Drupal\node\NodeInterface;
 use Drupal\social_post\Entity\PostInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Entity\EntityInterface;
 
 /**
  * Implements hook_form_alter().
@@ -70,10 +77,13 @@ function social_content_report_mandatory_reason_validate(array $form, FormStateI
  * Implements hook_post_links_alter().
  */
 function social_content_report_post_links_alter(array &$links, PostInterface $entity, array &$context) {
-  $link = \Drupal::service('social_content_report.content_report_service')->getModalLink($entity, 'report_post');
-
-  if ($link) {
-    $links['post']['#links']['report'] = $link;
+  $content_link = \Drupal::service('social_content_report.content_report_service')->getModalLink($entity, 'report_post');
+  $user_link = \Drupal::service('social_content_report.content_report_service')->getUserModalLink($entity, 'block_user');
+  if ($user_link) {
+    $links['post']['#links']['report_user'] = $user_link;
+  }
+  if ($content_link) {
+    $links['post']['#links']['report_content'] = $content_link;
   }
 }
 
@@ -81,10 +91,13 @@ function social_content_report_post_links_alter(array &$links, PostInterface $en
  * Implements hook_comment_links_alter().
  */
 function social_content_report_comment_links_alter(array &$links, CommentInterface $entity, array &$context) {
-  $link = \Drupal::service('social_content_report.content_report_service')->getModalLink($entity, 'report_comment');
-
-  if ($link) {
-    $links['comment']['#links']['report'] = $link;
+  $content_link = \Drupal::service('social_content_report.content_report_service')->getModalLink($entity, 'report_comment');
+  $user_link = \Drupal::service('social_content_report.content_report_service')->getUserModalLink($entity, 'block_user');
+  if ($user_link) {
+    $links['post']['#links']['report_user'] = $user_link;
+  }
+  if ($content_link) {
+    $links['comment']['#links']['report'] = $content_link;
   }
 }
 
@@ -113,5 +126,88 @@ function social_content_report_node_links_alter(array &$links, NodeInterface $en
 function social_content_report_activity_send_email_notifications_alter(array &$items, array $email_message_templates) {
   if (isset($email_message_templates['content_reported']) && \Drupal::currentUser()->hasPermission('view inappropriate reports')) {
     $items['message_to_me']['templates'][] = 'content_reported';
+  }
+}
+
+function social_content_report_post_access(EntityInterface $entity, $operation, AccountInterface $account) {
+  if ($operation !== 'view') {
+    // No opinion.
+    return AccessResult::neutral();
+  }
+
+  // We flagged blocking content from this user, let's remove it.
+  return \Drupal::service('social_content_report.content_report_service')->calculateEntityAccess($entity);
+}
+
+function social_content_report_activity_access(EntityInterface $entity, $operation, AccountInterface $account) {
+  if ($operation !== 'view') {
+    // No opinion.
+    return AccessResult::neutral();
+  }
+
+  // We flagged blocking content from this user, let's remove it.
+  return \Drupal::service('social_content_report.content_report_service')->calculateEntityAccess($entity);
+}
+
+function social_content_report_comment_access(EntityInterface $entity, $operation, AccountInterface $account) {
+  if ($operation !== 'view') {
+    // No opinion.
+    return AccessResult::neutral();
+  }
+
+  // We flagged blocking content from this user, let's remove it.
+  return \Drupal::service('social_content_report.content_report_service')->calculateEntityAccess($entity);
+}
+
+function social_content_report_node_access(EntityInterface $entity, $operation, AccountInterface $account) {
+  if ($operation !== 'view') {
+    // No opinion.
+    return AccessResult::neutral();
+  }
+
+  // We flagged blocking content from this user, let's remove it.
+  return \Drupal::service('social_content_report.content_report_service')->calculateEntityAccess($entity);
+}
+
+function social_content_report_private_message_access(EntityInterface $entity, $operation, AccountInterface $account) {
+  if ($operation !== 'view') {
+    // No opinion.
+    return AccessResult::neutral();
+  }
+
+  // We flagged blocking content from this user, let's remove it.
+  return \Drupal::service('social_content_report.content_report_service')->calculateEntityAccess($entity);
+}
+
+function social_content_report_private_message_thread_access(EntityInterface $entity, $operation, AccountInterface $account) {
+  if ($operation !== 'view') {
+    // No opinion.
+    return AccessResult::neutral();
+  }
+
+  // We flagged blocking content from this user, let's remove it.
+  return \Drupal::service('social_content_report.content_report_service')->calculateEntityAccess($entity);
+}
+
+/**
+ * Implements hook_entity_view().
+ *
+ * Mark notifications as read.
+ */
+function social_content_report_entity_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  // Generate the output text for the user in it's selected language.
+  if ($entity instanceof Activity && !empty($entity->get('field_activity_message')->target_id)) {
+    $message = Message::load($entity->get('field_activity_message')->target_id);
+    $customAccess = \Drupal::service('social_content_report.content_report_service')->calculateEntityAccess($message);
+    if ($customAccess instanceof AccessResultForbidden) {
+      $build = [];
+      return;
+    }
+    if ($message instanceof Message) {
+      // Get the text in the users language.
+      $output = \Drupal::service('activity_creator.activity_factory')->getMessageText($message);
+      // Replace the old text with the correct one.
+      $build['field_activity_output_text'][0]['#text'] = $output[0];
+    }
   }
 }

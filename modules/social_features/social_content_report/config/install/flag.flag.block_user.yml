@@ -1,0 +1,37 @@
+uuid: 31e74200-362a-4662-95a9-dd70f6085567
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+id: block_user
+label: 'Block user'
+bundles: {  }
+entity_type: user
+global: false
+weight: 0
+flag_short: 'Block this user'
+flag_long: 'Blocking the user will result in their content not being displayed anymore.'
+flag_message: 'Blocked the user succesfully.'
+unflag_short: 'Unblock this user'
+unflag_long: 'Display the contents of this user again.'
+unflag_message: 'Unblocking was succesful.'
+unflag_denied_text: ''
+flag_type: 'entity:user'
+link_type: reload
+flagTypeConfig:
+  show_in_links: {  }
+  show_as_field: true
+  show_on_form: false
+  show_contextual_link: true
+  extra_permissions:
+    owner: '0'
+  show_on_profile: true
+linkTypeConfig:
+  flag_confirmation: 'Enter flagging details'
+  unflag_confirmation: 'Unflag this content?'
+  flag_create_button: 'Create flagging'
+  flag_delete_button: 'Delete flagging'
+  form_behavior: default
+  edit_flagging: 'Edit flagging details'
+  flag_update_button: 'Update flagging'
