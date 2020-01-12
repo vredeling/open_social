@@ -26,7 +26,7 @@ flagTypeConfig:
   show_contextual_link: true
   extra_permissions:
     owner: '0'
-  show_on_profile: true
+  show_on_profile: false
 linkTypeConfig:
   flag_confirmation: 'Enter flagging details'
   unflag_confirmation: 'Unflag this content?'
