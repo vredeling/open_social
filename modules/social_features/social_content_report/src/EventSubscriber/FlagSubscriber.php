@@ -149,8 +149,13 @@ class FlagSubscriber implements EventSubscriberInterface {
       }
     }
 
+    $message = $this->t('Your report has been submitted.');
+    if ($flagging->getFlagId() === 'block_user') {
+      $message = $this->t('You have blocked the contents of this user.');
+    }
+
     // In any case log that the report was submitted.
-    $this->messenger->addMessage($this->t('Your report has been submitted.'));
+    $this->messenger->addMessage($message);
 
     // Clear cache tags for entity to remove the Report link.
     if (!$invalidated) {
