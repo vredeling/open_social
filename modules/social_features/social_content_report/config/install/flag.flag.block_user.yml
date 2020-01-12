@@ -21,7 +21,7 @@ flag_type: 'entity:user'
 link_type: reload
 flagTypeConfig:
   show_in_links: {  }
-  show_as_field: true
+  show_as_field: false
   show_on_form: false
   show_contextual_link: true
   extra_permissions:

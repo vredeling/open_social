@@ -13,6 +13,7 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
 use Drupal\flag\FlagServiceInterface;
 use Drupal\social_post\Entity\Post;
+use Drupal\user\Entity\User;
 
 /**
  * Provides a content report service.
@@ -152,13 +153,17 @@ class ContentReportService implements ContentReportServiceInterface {
     if (!$this->currentUser->hasPermission('flag ' . $flag_id)) {
       return NULL;
     }
-    if (!method_exists($entity, 'getOwner')) {
+    if (!$entity instanceof User && !method_exists($entity, 'getOwner')) {
       return NULL;
     }
-
     $flag = $this->flagService->getFlagById($flag_id);
-    /** @var \Drupal\user\Entity\User $owner */
-    $owner = $entity->getOwner();
+
+    $owner = $entity;
+    if (!$entity instanceof User) {
+      /** @var \Drupal\user\Entity\User $owner */
+      $owner = $entity->getOwner();
+    }
+
     $flagging = $this->flagService->getFlagging($flag, $owner, $this->currentUser);
 
 
@@ -171,21 +176,45 @@ class ContentReportService implements ContentReportServiceInterface {
       $route = 'flag.action_link_unflag';
     }
 
-    // Return the modal link if the user did not yet flag this content.
-    return [
-      'title' => $title,
-      'url' => Url::fromRoute($route,
-        [
-          'flag' => $flag_id,
-          'entity_id' => $owner->id(),
+    $url = Url::fromRoute($route,
+      [
+        'flag' => $flag_id,
+        'entity_id' => $owner->id(),
+      ],
+      [
+        'query' => [
+          'destination' => Url::fromRoute('<current>')->toString(),
         ],
-        [
-          'query' => [
-            'destination' => Url::fromRoute('<current>')->toString(),
-          ],
-        ]
-      ),
+      ]
+    );
+
+    $element = [
+      'title' => $title,
+      'url' => $url,
     ];
+
+    // Return a button instead.
+    if ($is_button) {
+      return [
+        '#type' => 'link',
+        '#url' => $url,
+        '#title' => $title,
+        '#attributes' => [
+          'class' => [
+            'btn',
+            'btn-default',
+            'btn-sm',
+            'btn-follow',
+            'flag',
+            'action-flag',
+            'waves-effect',
+            'waves-btn',
+          ],
+        ],
+      ];
+    }
+
+    return $element;
   }
 
   /**

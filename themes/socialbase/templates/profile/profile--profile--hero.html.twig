@@ -69,6 +69,12 @@
       </div>
     {% endif %}
 
+    {% if profile_block_button %}
+      <div class="hero-footer__cta">
+        {{ profile_block_button }}
+      </div>
+    {% endif %}
+
   {% if (content.field_profile_function|render or content.field_profile_organization|render) or profile_contact_label == 'private_message' %}
     </footer>
   {% endif %}
