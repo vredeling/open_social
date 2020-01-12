@@ -8,8 +8,10 @@ use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Logger\LoggerChannelTrait;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\flag\Entity\Flagging;
 use Drupal\flag\Event\FlagEvents;
 use Drupal\flag\Event\FlaggingEvent;
+use Drupal\flag\Event\UnflaggingEvent;
 use Drupal\social_content_report\ContentReportServiceInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -78,7 +80,32 @@ class FlagSubscriber implements EventSubscriberInterface {
   public static function getSubscribedEvents() {
     $events = [];
     $events[FlagEvents::ENTITY_FLAGGED][] = ['onFlag'];
+    $events[FlagEvents::ENTITY_UNFLAGGED][] = ['onUnFlag'];
     return $events;
+  }
+
+  /**
+   * Listener for flagging events.
+   *
+   * @param \Drupal\flag\Event\UnflaggingEvent $event
+   *   The event when something is flagged.
+   */
+  public function onUnFlag(UnflaggingEvent $event) {
+    /** @var \Drupal\flag\FlaggingInterface $flagging */
+    $flagging = $event->getFlaggings();
+    /** @var \Drupal\flag\Entity\Flagging $entity */
+    foreach ($flagging as $flag_id => $flag) {
+      if ($flag instanceof Flagging) {
+        $entity = $flag;
+        $entity_type = $entity->getFlaggableType();
+        $entity_id = $entity->getFlaggableId();
+        // we want to invalide caches anyhow due to issue in flag:
+        // https://www.drupal.org/project/flag/issues/2568131
+        $this->cacheInvalidator->invalidateTags([$entity_type . ':' . $entity_id]);
+      }
+    }
+
+    $this->cacheInvalidator->invalidateTags(['flagging_list', 'activity_list']);
   }
 
   /**
