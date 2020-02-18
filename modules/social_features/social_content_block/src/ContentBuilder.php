@@ -110,9 +110,13 @@ class ContentBuilder implements ContentBuilderInterface {
     $fields = [];
 
     foreach ($field_names as $field_name) {
-      $fields[$field_name] = array_map(function ($item) {
-        return $item['target_id'];
-      }, $block_content->get($field_name)->getValue());
+      $field = $block_content->get($field_name);
+
+      if (!$field->isEmpty()) {
+        $fields[$field_name] = array_map(function ($item) {
+          return $item['target_id'];
+        }, $field->getValue());
+      }
     }
 
     /** @var \Drupal\social_content_block\ContentBlockPluginInterface $plugin */
@@ -132,7 +136,9 @@ class ContentBuilder implements ContentBuilderInterface {
       );
     }
 
-    $plugin->query($query, $fields);
+    if ($fields) {
+      $plugin->query($query, $fields);
+    }
 
     // Allow other modules to change the query to add additions.
     $this->moduleHandler->alter('social_content_block_query', $query, $block_content);
@@ -168,10 +174,10 @@ class ContentBuilder implements ContentBuilderInterface {
    * @param \Drupal\block_content\BlockContentInterface $block_content
    *   The block content where we get the settings from.
    *
-   * @return string
-   *   The read more link.
+   * @return array
+   *   The read more link render array.
    */
-  protected function getLink(BlockContentInterface $block_content) {
+  protected function getLink(BlockContentInterface $block_content) : array {
     $field = $block_content->field_link;
 
     if (!$field->isEmpty()) {
@@ -186,17 +192,17 @@ class ContentBuilder implements ContentBuilderInterface {
       ];
       $url->setOptions($link_options);
 
-      return Link::fromTextAndUrl($field->title, $url)->toString();
+      return Link::fromTextAndUrl($field->title, $url)->toRenderable();
     }
 
-    return '';
+    return [];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function build($entity_type_id, $entity_id) {
-    if ($entity_type_id !== 'block_content') {
+  public function build($entity_id, $entity_type_id, $entity_bundle) : array {
+    if ($entity_type_id !== 'block_content' || $entity_bundle !== 'custom_content_list') {
       return [];
     }
 
@@ -205,20 +211,22 @@ class ContentBuilder implements ContentBuilderInterface {
 
     if (
       !$block_content instanceof BlockContentInterface ||
-      $block_content->bundle() !== 'custom_content_list'
+      $block_content->bundle() !== $entity_bundle
     ) {
       return [];
     }
 
-    $data = [
-      '#theme' => 'social_content_block',
-      '#title' => $block_content->label(),
-      '#subtitle' => $block_content->field_subtitle->value,
-      '#entities' => $this->getEntities($block_content),
-      '#link' => $this->getLink($block_content),
-    ];
+    $build['content'] = [];
 
-    $build['content'] = $data;
+    if (!$block_content->field_subtitle->isEmpty()) {
+      $build['content']['subtitle'] = $block_content->field_subtitle->view(['label' => 'hidden']);
+    }
+    $build['content']['entities'] = $this->getEntities($block_content);
+
+    $link = $this->getLink($block_content);
+    if (!empty($link)) {
+      $build['content']['link'] = $link;
+    }
 
     return $build;
   }
