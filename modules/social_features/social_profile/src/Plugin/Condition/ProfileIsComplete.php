@@ -1,6 +1,7 @@
 <?php
 
 namespace Drupal\social_profile\Plugin\Condition;
+
 use Drupal\profile\Entity\Profile;
 use Drupal\rules\Core\RulesConditionBase;
 
@@ -23,7 +24,7 @@ class ProfileIsComplete extends RulesConditionBase {
   /**
    * Check if the given profile is filled in completely.
    *
-   * @param \Drupal\profile\Entity\Profile
+   * @param \Drupal\profile\Entity\Profile $profile
    *   The profile to check.
    *
    * @return bool

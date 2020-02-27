@@ -3,7 +3,7 @@
 namespace Drupal\social_private_message\Plugin\RulesAction;
 
 use Drupal\rules\Core\RulesActionBase;
-use Drupal\user\UserDataInterface;
+use Drupal\user\Entity\User;
 
 /**
  * Provides a 'Send Private Message' action.
@@ -30,10 +30,10 @@ class SendPrivateMessage extends RulesActionBase {
    * Send a private message.
    */
   protected function doExecute() {
-    $sender = \Drupal\user\Entity\User::load($this->getContextValue('userid'));
+    $sender = User::load($this->getContextValue('userid'));
     $recipients[] = $sender;
 
-    $receiver = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+    $receiver = User::load(\Drupal::currentUser()->id());
     $recipients[] = $receiver;
 
     /** @var \Drupal\private_message\Service\PrivateMessageServiceInterface $private_message_service */
@@ -59,7 +59,7 @@ class SendPrivateMessage extends RulesActionBase {
     // $thread_last_check get the same timestamp. Showing no new messages badge.
     // https://www.drupal.org/project/private_message/issues/3043898
     // TODO:: Update to the correct version when issue has been solved.
-    /** @var UserDataInterface $userData */
+    /** @var \Drupal\user\UserDataInterface $userData */
     $userData = \Drupal::service('user.data');
     $userData->set('private_message', $receiver->id(), 'private_message_thread:' . $thread->id(), 0);
   }
