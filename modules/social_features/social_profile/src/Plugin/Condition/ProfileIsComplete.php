@@ -21,7 +21,7 @@ use Drupal\rules\Core\RulesConditionBase;
 class ProfileIsComplete extends RulesConditionBase {
 
   /**
-   * Check if the given node is sticky.
+   * Check if the given profile is filled in completely.
    *
    * @param \Drupal\profile\Entity\Profile
    *   The profile to check.
@@ -30,17 +30,19 @@ class ProfileIsComplete extends RulesConditionBase {
    *   TRUE if the profile is completely filled in.
    */
   protected function doEvaluate(Profile $profile) {
-    $messenger = \Drupal::messenger();
+    // Get all the profile fields.
     $fields = $profile->getFields();
     foreach ($fields as $field) {
-      if (strpos($field->getName(), 'field_') !== FALSE && $field->getName() !== 'field_profile_profile_tag') {
-        $value = $field->getValue();
-        if (empty($value)) {
+      // If the field starts with "field_" and is not profile_tag, we continue.
+      if (strpos($field->getName(), 'field_') !== FALSE &&
+        $field->getName() !== 'field_profile_profile_tag') {
+        // If one of the fields is empty, we return FALSE.
+        if (empty($field->getValue())) {
           return FALSE;
         }
-
       }
     }
+    // None of the fields is empty, return TRUE.
     return TRUE;
   }
 
