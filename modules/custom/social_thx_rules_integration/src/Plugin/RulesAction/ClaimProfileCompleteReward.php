@@ -2,7 +2,9 @@
 
 namespace Drupal\social_thx_rules_integration\Plugin\RulesAction;
 
+use Drupal\Core\Queue\RequeueException;
 use Drupal\rules\Core\RulesActionBase;
+use GuzzleHttp\Exception\RequestException;
 
 /**
  * Provides a 'Claim Profile Complete Reward' action.
@@ -19,8 +21,8 @@ use Drupal\rules\Core\RulesActionBase;
  *     )
  *   },
  *   provides = {
- *     "fetched_qr_url" = @ContextDefinition("string",
- *        label = @Translation("URL containing a QR code")
+ *     "fetched_qr" = @ContextDefinition("string",
+ *        label = @Translation("Base64 encoded QR image")
  *      ),
  *   }
  * )
@@ -36,11 +38,24 @@ class ClaimProfileCompleteReward extends RulesActionBase {
     // Get the rule ID that has been provided by the SM.
     $rule_id = $this->getContextValue('rule_id');
     // Lets build the URL for the QR image.
-    $qr_url = 'https://us-central1-thx-wallet-dev.cloudfunctions.net/api/qr/claim/';
-    $qr_url .= $pool_address;
-    $qr_url .= '/' . $rule_id;
+    $api_url = 'https://us-central1-thx-wallet-dev.cloudfunctions.net/api/rewards';
+
+    $qr_body = '';
+    try {
+      $response = \Drupal::httpClient()->post($api_url, [
+        'json' => [
+          'pool' => $pool_address,
+          'rule' => $rule_id
+        ],
+      ]);
+      $qr_body = $response->getBody()->getContents();
+    }
+    catch (RequestException $e) {
+      return FALSE;
+    }
+
     // Set the complete URL as a provided value for other actions.
-    $this->setProvidedValue('fetched_qr_url', $qr_url);
+    $this->setProvidedValue('fetched_qr', $qr_body);
   }
 
 }
