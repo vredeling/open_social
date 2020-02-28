@@ -1,0 +1,7 @@
+name: 'social_thx_rules_integration'
+type: module
+description: 'THX & Rules Integration'
+core: 8.x
+package: 'Custom'
+dependencies:
+  - social_rules

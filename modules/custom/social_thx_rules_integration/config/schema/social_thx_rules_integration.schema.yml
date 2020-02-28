@@ -1,0 +1,7 @@
+social_thx_rules_integration:.settings:
+  type: config_object
+  label: 'Social THX Rules integration Settings'
+  mapping:
+    pool_address:
+      type: string
+      label: 'The address for the THX token Pool'

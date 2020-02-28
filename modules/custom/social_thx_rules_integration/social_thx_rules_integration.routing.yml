@@ -1,0 +1,7 @@
+social_thx_rules_integration.admin_settings_form:
+  path: '/social_thx_rules_integration/form/admin_settings'
+  defaults:
+    _form: '\Drupal\social_thx_rules_integration\Form\AdminSettingsForm'
+    _title: 'THX & Rules integration'
+  requirements:
+    _permission: 'administer site configuration'
