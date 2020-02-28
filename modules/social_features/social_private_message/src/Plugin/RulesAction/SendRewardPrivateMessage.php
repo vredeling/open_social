@@ -53,17 +53,25 @@ class SendRewardPrivateMessage extends RulesActionBase {
     $message = $this->getContextValue('message');
     $qrcode = $this->getContextValue('url');
 
+    // Get body of pm.
+    $checked = check_markup($message, 'basic_html');
+
     if (!empty($qrcode)) {
-      $message .= "<img src='data:image/png;base64, " . $qrcode . "'/>";
+      $private_message_body = $checked->__toString();
+      $private_message_body .= '<br />';
+      $private_message_body .= "<img src='data:image/png;base64, " . $qrcode . "'/>";
     }
 
-    // Get body of pm.
-    $private_message_body = check_markup($message, 'basic_html');
+    // Format as full_html;
+    $text = [
+      'value' => $private_message_body,
+      'format' => 'full_html',
+    ];
 
     // Create a single message with the pm body.
     $private_message = \Drupal::entityTypeManager()->getStorage('private_message')->create([
       'owner' => $sender,
-      'message' => $private_message_body,
+      'message' => $text,
     ]);
 
     $private_message->save();
