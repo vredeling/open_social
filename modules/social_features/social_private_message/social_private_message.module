@@ -253,6 +253,13 @@ function social_private_message_entity_view_alter(array &$build, EntityInterface
 
     $only_exist_members = $thread->getMembers();
 
+    if ($thread->hasField('field_locked')) {
+      $locked = $thread->getFieldValue('field_locked', 'value');
+      if ($locked) {
+        $build['private_message_form']['#access'] = FALSE;
+      }
+    }
+
     // View mode inbox.
     if ($build['#view_mode'] === 'inbox') {
       $members_with_deleted = $thread->get('members')->getValue();

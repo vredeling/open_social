@@ -21,6 +21,9 @@ class SocialPrivateMessageServiceProvider extends ServiceProviderBase {
 
     $definition = $container->getDefinition('private_message.mapper');
     $definition->setClass('Drupal\social_private_message\Mapper\PrivateMessageMapper');
+
+    $definition = $container->getDefinition('private_message.service');
+    $definition->setClass('Drupal\social_private_message\Service\PrivateMessageService');
   }
 
 }

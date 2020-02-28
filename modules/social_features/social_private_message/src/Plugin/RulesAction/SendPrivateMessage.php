@@ -30,20 +30,24 @@ class SendPrivateMessage extends RulesActionBase {
    * Send a private message.
    */
   protected function doExecute() {
+    $recipients = [];
     $sender = User::load($this->getContextValue('userid'));
     $recipients[] = $sender;
 
     $receiver = User::load(\Drupal::currentUser()->id());
     $recipients[] = $receiver;
 
-    /** @var \Drupal\private_message\Service\PrivateMessageServiceInterface $private_message_service */
+    /** @var \Drupal\social_private_message\Service\PrivateMessageService $private_message_service */
     $private_message_service = \Drupal::service('private_message.service');
 
     // Create a pm thread between these users.
-    $thread = $private_message_service->getThreadForMembers($recipients);
+    // Lock it so nobody can change it.
+    // This means a new Thread is always created even if it exists,
+    // and ensure nobody can reply. So it's more like a DM.
+    $thread = $private_message_service->getNewThreadForMembers($recipients);
 
     // Get body of pm.
-    $private_message_body = check_markup($this->getContextValue('message'), 'plain_text');
+    $private_message_body = check_markup($this->getContextValue('message'), 'full_html');
 
     // Create a single message with the pm body.
     $private_message = \Drupal::entityTypeManager()->getStorage('private_message')->create([
@@ -52,6 +56,9 @@ class SendPrivateMessage extends RulesActionBase {
     ]);
 
     $private_message->save();
+    if ($thread->hasField('field_locked')) {
+      $thread->set('field_locked', TRUE);
+    }
     $thread->addMessage($private_message)->save();
 
     // There is a contrib private message bug that when creating a new thread
