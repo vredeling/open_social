@@ -47,7 +47,7 @@ class SendPrivateMessage extends RulesActionBase {
     $thread = $private_message_service->getNewThreadForMembers($recipients);
 
     // Get body of pm.
-    $private_message_body = check_markup($this->getContextValue('message'), 'full_html');
+    $private_message_body = check_markup($this->getContextValue('message'), 'basic_html');
 
     // Create a single message with the pm body.
     $private_message = \Drupal::entityTypeManager()->getStorage('private_message')->create([
