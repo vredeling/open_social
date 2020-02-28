@@ -9,7 +9,7 @@ use Drupal\user\Entity\User;
  * Provides a 'Send Reward Private Message' action.
  *
  * @RulesAction(
- *   id = "rules_send_private_message",
+ *   id = "rules_send_reward_private_message",
  *   label = @Translation("Send private message including THX Reward"),
  *   category = @Translation("Open Social"),
  *   context = {
@@ -58,7 +58,7 @@ class SendRewardPrivateMessage extends RulesActionBase {
     }
 
     // Get body of pm.
-    $private_message_body = check_markup(, 'basic_html');
+    $private_message_body = check_markup($message, 'basic_html');
 
     // Create a single message with the pm body.
     $private_message = \Drupal::entityTypeManager()->getStorage('private_message')->create([
