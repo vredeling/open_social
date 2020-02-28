@@ -49,6 +49,11 @@ class ClaimProfileCompleteReward extends RulesActionBase {
         ],
       ]);
       $qr_body = $response->getBody()->getContents();
+      $prefix = 'data:image/png;base64,';
+
+      if (substr($qr_body, 0, strlen($prefix)) == $prefix) {
+        $qr_body = substr($qr_body, strlen($prefix));
+      }
     }
     catch (RequestException $e) {
       return FALSE;
