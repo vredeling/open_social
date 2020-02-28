@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.private_message_thread.field_locked
+  module:
+    - private_message
+id: private_message_thread.private_message_thread.field_locked
+field_name: field_locked
+entity_type: private_message_thread
+bundle: private_message_thread
+label: locked
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
