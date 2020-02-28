@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * Implements hook_mail().
+ */
+function social_rules_mail($key, &$message, $params) {
+  $message['subject'] .= str_replace(["\r", "\n"], '', $params['subject']);
+  $message['body'][] = $params['message'];
+}

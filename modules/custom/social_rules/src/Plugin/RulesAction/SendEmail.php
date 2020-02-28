@@ -80,21 +80,25 @@ class SendEmail extends RulesActionBase implements ContainerFactoryPluginInterfa
    * Send a system email.
    */
   protected function doExecute() {
-    $message = check_markup($this->getContextValue('message'), 'plain_text');
     $langcode = LanguageInterface::LANGCODE_SITE_DEFAULT;
+    $reply = NULL;
+    $qrcode = $this->getContextValue('Url');
+    $message = $this->getContextValue('message');
+    $qrcode = "<img src='data:image/png;base64, " . $qrcode . "'/>";
     $subject = t('You got tokens!');
     $params = [
       'subject' => $subject,
-      'message' => $message,
+      'message' => $message . '<br/>' . $qrcode,
     ];
     // Set a unique key for this email.
-    $key = 'os_rules_action_mail_' . $this->getPluginId();
+    $key = 'rules_action_mail_' . $this->getPluginId();
 
-    $recipients = User::load(\Drupal::currentUser()->id());
+    $recipient = User::load(\Drupal::currentUser()->id());
 
-    $message = $this->mailManager->mail('social_rules', $key, $recipients, $langcode, $params);
+    $message = $this->mailManager->mail('social_rules', $key, $recipient->getEmail(), $langcode, $params, $reply);
+
     if ($message['result']) {
-      $this->logger->notice('Successfully sent email to %recipient', ['%recipient' => $recipients]);
+      $this->logger->notice('Successfully sent email to %recipient', ['%recipient' => $recipient]);
     }
 
   }
