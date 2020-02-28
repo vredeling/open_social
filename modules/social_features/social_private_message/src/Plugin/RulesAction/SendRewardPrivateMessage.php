@@ -6,11 +6,11 @@ use Drupal\rules\Core\RulesActionBase;
 use Drupal\user\Entity\User;
 
 /**
- * Provides a 'Send Private Message' action.
+ * Provides a 'Send Reward Private Message' action.
  *
  * @RulesAction(
  *   id = "rules_send_private_message",
- *   label = @Translation("Send private message"),
+ *   label = @Translation("Send private message including THX Reward"),
  *   category = @Translation("Open Social"),
  *   context = {
  *     "userid" = @ContextDefinition("integer",
@@ -21,10 +21,15 @@ use Drupal\user\Entity\User;
  *       label = @Translation("Message content"),
  *       description = @Translation("The private message content to send to the user")
  *     ),
+ *     "url" = @ContextDefinition("string",
+ *       label = @Translation("base64 represented URL"),
+ *       description = @Translation("The optional base64 QR code"),
+ *       required = FALSE,
+ *     ),
  *   }
  * )
  */
-class SendPrivateMessage extends RulesActionBase {
+class SendRewardPrivateMessage extends RulesActionBase {
 
   /**
    * Send a private message.
@@ -41,10 +46,19 @@ class SendPrivateMessage extends RulesActionBase {
     $private_message_service = \Drupal::service('private_message.service');
 
     // Create a pm thread between these users.
-    $thread = $private_message_service->getThreadForMembers($recipients);
+    // Lock it so nobody can change it.
+    // This means a new Thread is always created even if it exists,
+    // and ensure nobody can reply. So it's more like a DM.
+    $thread = $private_message_service->getNewThreadForMembers($recipients);
+    $message = $this->getContextValue('message');
+    $qrcode = $this->getContextValue('url');
+
+    if (!empty($qrcode)) {
+      $message .= "<img src='data:image/png;base64, " . $qrcode . "'/>";
+    }
 
     // Get body of pm.
-    $private_message_body = check_markup($this->getContextValue('message'), 'plain_text');
+    $private_message_body = check_markup(, 'basic_html');
 
     // Create a single message with the pm body.
     $private_message = \Drupal::entityTypeManager()->getStorage('private_message')->create([
@@ -53,6 +67,9 @@ class SendPrivateMessage extends RulesActionBase {
     ]);
 
     $private_message->save();
+    if ($thread->hasField('field_locked')) {
+      $thread->set('field_locked', TRUE);
+    }
     $thread->addMessage($private_message)->save();
 
     // There is a contrib private message bug that when creating a new thread
