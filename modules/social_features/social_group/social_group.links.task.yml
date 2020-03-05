@@ -33,3 +33,9 @@ social_group.members:
   base_route: entity.group.canonical
   title: Members
   weight: 60
+
+social_group.requests:
+  route_name: view.group_pending_members.page_1
+  base_route: entity.group.canonical
+  title: Manage requests
+  weight: 60

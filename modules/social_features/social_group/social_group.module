@@ -295,6 +295,11 @@ function social_group_preprocess_group(array &$variables) {
     $variables['cta'] = t('Invitation only');
   }
 
+  if (!$group->getMember($account) && $group->hasPermission('request group membership', $account)) {
+    $variables['group_request_url'] = Url::fromRoute('entity.group.request_membership', ['group' => $group->id()]);
+    $variables['cta'] = t('Request Membership');
+  }
+
   // Add the hero styled image.
   if ($group->hasField('field_group_image') && !empty($group->get('field_group_image')->entity)) {
     // Fetch image style from field info.
