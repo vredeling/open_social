@@ -1,0 +1,8 @@
+name: 'Social Search Comments'
+description: 'Adds comments to the "all" and "content" search indexes.'
+type: module
+core: 8.x
+dependencies:
+  - social:social_search
+package: Social (Experimental)
+hidden: true

@@ -1,0 +1,10 @@
+This module fills a quick and dirty need. It uses a configuration override so
+that it can be enabled and disabled easily and leaves no permanent changes.
+It's been hidden so that unsuspecting users can't accidentally turn it on before
+we are ready to support it.
+
+The module aims to add comments for indexing to the "All" and "Content" search
+indexes.
+
+Post comments are excluded because posts themselves are also not visible in
+search.

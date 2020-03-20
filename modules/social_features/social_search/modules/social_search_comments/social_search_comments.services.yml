@@ -1,0 +1,5 @@
+services:
+  social_search_comments.search_config_overrider:
+    class: \Drupal\social_search_comments\CommentConfigOverride
+    tags:
+      - {name: config.factory.override, priority: 5}
