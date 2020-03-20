@@ -29,8 +29,14 @@ class CommentConfigOverride implements ConfigFactoryOverrideInterface {
     foreach ($indices as $index) {
       if (in_array($index, $names)) {
         $overrides[$index] = [
-          'dependencies' => ['comment' => 'comment'],
-          'config' => ['field.storage.comment.field_comment_body' => 'field.storage.comment.field_comment_body'],
+          'dependencies' => [
+            'modules' => [
+              'comment' => 'comment',
+            ],
+            'config' => [
+              'field.storage.comment.field_comment_body' => 'field.storage.comment.field_comment_body',
+            ],
+          ],
           'field_settings' => [
             'field_comment_body' => [
               'label' => 'Comment',

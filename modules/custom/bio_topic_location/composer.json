@@ -1,0 +1,6 @@
+{
+    "name": "goalgorilla/bio_group_move",
+    "description": "Moves topics to a specific group when type is attached.",
+    "type": "drupal-module",
+    "license": "proprietary"
+}

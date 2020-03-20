@@ -1,0 +1,4 @@
+name: BIO Topic Location
+type: module
+description: 'Add location to topics'
+core: 8.x
