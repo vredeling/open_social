@@ -120,3 +120,67 @@ function social_comment_update_8002() {
 function social_comment_update_8801() {
   activity_creator_set_entity_view_mode('comment', 'activity');
 }
+
+/**
+ * Create teaser view mode for comments.
+ */
+function social_comment_update_8802() {
+  \Drupal::configFactory()
+    ->getEditable('core.entity_view_mode.comment.teaser')
+    ->setData(
+      [
+        'langcode' => 'en',
+        'status' => TRUE,
+        'dependencies' => [
+          'module' => [
+            'comment',
+          ],
+        ],
+        'id' => 'comment.teaser',
+        'label' => 'Teaser',
+        'targetEntityType' => 'comment',
+        'cache' => TRUE,
+      ]
+    )
+    ->save(TRUE);
+
+  \Drupal::configFactory()
+    ->getEditable('core.entity_view_display.comment.comment.teaser')
+    ->setData(
+      [
+        'langcode' => 'en',
+        'status' => TRUE,
+        'dependencies' => [
+          'config' => [
+            'comment.type.comment',
+            'core.entity_view_mode.comment.teaser',
+            'field.field.comment.comment.field_comment_body',
+          ],
+          'module' => [
+            'text',
+          ],
+        ],
+        'id' => 'comment.comment.teaser',
+        'targetEntityType' => 'comment',
+        'bundle' => 'comment',
+        'mode' => 'teaser',
+        'content' => [
+          'field_comment_body' => [
+            'weight' => 0,
+            'label' => 'hidden',
+            'settings' => [],
+            'third_party_settings' => [],
+            'type' => 'text_default',
+            'region' => 'content',
+          ],
+          'links' => [
+            'weight' => 1,
+            'region' => 'content',
+            'settings' => [],
+            'third_party_settings' => [],
+          ],
+        ],
+      ]
+    )
+    ->save(TRUE);
+}
