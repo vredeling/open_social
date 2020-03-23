@@ -2,7 +2,7 @@
 
 namespace Drupal\social_search\Form;
 
-use Drupal\Component\Utility\Html;
+use Drupal\Component\Utility\Xss;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -101,8 +101,9 @@ class SearchHeroForm extends FormBase implements ContainerInjectionInterface {
     }
     else {
       // Redirect to the search page with filters in the GET parameters.
-      $search_input = Html::escape($form_state->getValue('search_input'));
+      $search_input = Xss::filter($form_state->getValue('search_input'));
       $search_input = preg_replace('/[\/]+/', ' ', $search_input);
+      $search_input = str_replace('&amp;', '&', $search_input);
       $new_route = "view.{$route_parts[1]}.page";
       $search_group_page = Url::fromRoute($new_route, ['keys' => $search_input]);
     }

@@ -116,7 +116,7 @@ function social_user_form_views_exposed_form_alter(&$form, FormStateInterface $f
 }
 
 /**
- * Returns array with titles of all groups.
+ * Returns array with titles of all groups, ordered by their label.
  */
 function _social_user_get_groups() {
   $data = &drupal_static(__FUNCTION__);
@@ -125,6 +125,7 @@ function _social_user_get_groups() {
     $data = \Drupal::database()
       ->select('groups_field_data', 'gfd')
       ->fields('gfd', ['id', 'label'])
+      ->orderBy('label')
       ->execute()
       ->fetchAllKeyed(0, 1);
   }
@@ -297,7 +298,7 @@ function _social_user_pass_reset_submit($form, FormStateInterface $form_state) {
     // the user save form before. Which means we can redirect to user profile.
     if ($first_time_login) {
       $form_state->setRedirect(
-        'entity.profile.type.user_profile_form',
+        'profile.user_page.single',
         [
           'user' => $submitted_user_id,
           'profile_type' => 'profile',

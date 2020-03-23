@@ -27,6 +27,13 @@ class SocialDrupalContext extends DrupalContext {
    * @BeforeScenario
    */
   public function prepareBigPipeNoJsCookie(BeforeScenarioScope $scope) {
+    // Start a session if not already done.
+    // Needed since https://github.com/minkphp/Mink/pull/705
+    // Otherwise executeScript or setCookie will throw an error.
+    if (!$this->getSession()->isStarted()) {
+      $this->getSession()->start();
+    }
+
     try {
       // Check if JavaScript can be executed by Driver.
       $this->getSession()->getDriver()->executeScript('true');
@@ -304,6 +311,28 @@ class SocialDrupalContext extends DrupalContext {
     // This method is intentionally left blank. Projects extending Open Social
     // are encouraged to overwrite this method and call the methods that are
     // needed to fill in custom required fields for the used type.
+  }
+
+  /**
+   * @Given I am logged in as :name with the :permissions permission(s)
+   */
+  public function assertLoggedInWithPermissionsByName($name, $permissions) {
+    // Create a temporary role with given permissions.
+    $permissions = array_map('trim', explode(',', $permissions));
+    $role = $this->getDriver()->roleCreate($permissions);
+
+    $manager = $this->getUserManager();
+
+    // Change internal current user.
+    $manager->setCurrentUser($manager->getUser($name));
+    $user = $manager->getUser($name);
+
+    // Assign the temporary role with given permissions.
+    $this->getDriver()->userAddRole($user, $role);
+    $this->roles[] = $role;
+
+    // Login.
+    $this->login($user);
   }
 
 }
