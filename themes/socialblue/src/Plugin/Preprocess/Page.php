@@ -28,7 +28,7 @@ class Page extends PageBase {
 
       // Display blocks on the left side of profile pages.
       $route_match = \Drupal::routeMatch();
-      if ($route_match->getParameter('user') && $route_match->getRouteName() !== 'entity.profile.type.user_profile_form') {
+      if ($route_match->getParameter('user') && $route_match->getRouteName() !== 'profile.user_page.single') {
         $variables['content_attributes']->addClass('sidebar-left');
         $variables['display_secondary_navigation'] = TRUE;
 
