@@ -13,7 +13,12 @@ dependencies:
   module:
     - activity_creator
     - dynamic_entity_reference
+    - layout_builder
     - text
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
 id: activity.activity.featured
 targetEntityType: activity
 bundle: activity
