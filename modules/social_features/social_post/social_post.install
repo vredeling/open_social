@@ -114,7 +114,7 @@ function social_post_update_8801() {
 /**
  * Give access to creating posts of specific types.
  */
-function social_post_update_8802(&$sandbox) {
+function social_post_update_8803(&$sandbox) {
   if (!isset($sandbox['total'])) {
     $sandbox['total'] = \Drupal::entityQuery('user_role')
       ->condition('id', 'administrator', '<>')
