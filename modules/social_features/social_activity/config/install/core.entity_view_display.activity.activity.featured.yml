@@ -14,7 +14,6 @@ dependencies:
     - activity_creator
     - dynamic_entity_reference
     - text
-third_party_settings: {  }
 id: activity.activity.featured
 targetEntityType: activity
 bundle: activity
