@@ -30,6 +30,10 @@ class EventInviteEnrollActionForm extends EnrollActionForm {
     $nid = $this->routeMatch->getRawParameter('node');
     $current_user = $this->currentUser;
     $uid = $current_user->id();
+    // Used to determine if we should build the form.
+    $requested_or_invited = FALSE;
+    $submit_text = '';
+    $dropdown_text = '';
 
     if (!$current_user->isAnonymous()) {
       $conditions = [
@@ -39,12 +43,26 @@ class EventInviteEnrollActionForm extends EnrollActionForm {
 
       $enrollments = $this->entityStorage->loadByProperties($conditions);
       if ($enrollment = array_pop($enrollments)) {
-        $enroll_request_status = $enrollment->field_request_or_invite_status->value;
-        // If user got invited perform actions.
-        if ($enroll_request_status == '4') {
+        $enroll_request_or_invite_status = $enrollment->field_request_or_invite_status->value;
 
+        // If the user is invited, show the Accept
+        // button with a decline option.
+        if ((int)$enroll_request_or_invite_status === EventEnrollmentInterface::INVITE_PENDING_REPLY) {
           $submit_text = $this->t('Accept');
+          $dropdown_text = $this->t('Decline');
+          $requested_or_invited = TRUE;
+        }
+        // If the user is enrolled, show the Enrolled
+        // button with a cancel option.
+        elseif ((int)$enroll_request_or_invite_status === EventEnrollmentInterface::INVITE_ACCEPTED_AND_JOINED) {
+          $submit_text = $this->t('Enrolled');
+          $dropdown_text = $this->t('Cancel');
+          $requested_or_invited = TRUE;
+        }
 
+        // Either the user has been invited, or is enrolled,
+        // so now we show the action.
+        if ($requested_or_invited) {
           $form['enroll_for_this_event'] = [
             '#type' => 'submit',
             '#value' => $submit_text,
@@ -63,15 +81,15 @@ class EventInviteEnrollActionForm extends EnrollActionForm {
             ],
           ];
 
-          $form['decline_invite'] = [
+          $form['decline_or_cancel_invite'] = [
             '#type' => 'submit',
             '#value' => '',
-            '#name' => 'decline_invite',
+            '#name' => 'decline_or_cancel_invite',
           ];
 
           // Extra attributes needed for when a user is logged in.
           // This will make sure the button acts like a dropdown.
-          $form['decline_invite']['#attributes'] = [
+          $form['decline_or_cancel_invite']['#attributes'] = [
             'class' => [
               'btn',
               'btn-accent brand-bg-accent',
@@ -86,11 +104,9 @@ class EventInviteEnrollActionForm extends EnrollActionForm {
             'data-caret' => 'true',
           ];
 
-          $decline_text = $this->t('Decline');
-
           // Add markup for the button so it will be a dropdown.
-          $form['decline_invite_dropdown'] = [
-            '#markup' => '<ul class="dropdown-menu dropdown-menu-right"><li><a href="#" class="enroll-form-submit"> ' . $decline_text . ' </a></li></ul>',
+          $form['decline_or_cancel_invite_dropdown'] = [
+            '#markup' => '<ul class="dropdown-menu dropdown-menu-right"><li><a href="#" class="enroll-form-submit"> ' . $dropdown_text . ' </a></li></ul>',
           ];
 
           // Add a hidden operation we can fill with jquery when declining.
@@ -144,7 +160,7 @@ class EventInviteEnrollActionForm extends EnrollActionForm {
         $enrollment->field_request_or_invite_status->value = EventEnrollmentInterface::INVITE_ACCEPTED_AND_JOINED;
 
         // If decline is chosen, set invite to declined.
-        if ($operation === 'decline') {
+        if ($operation === 'declined_or_cancelled') {
           // Delete any messages since it would show a 'successful enrollment'.
           $this->messenger()->deleteAll();
           $enrollment->field_enrollment_status->value = '0';

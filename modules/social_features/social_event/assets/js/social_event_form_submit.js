@@ -15,7 +15,7 @@
 
                 // Set the decline operator value.
                 if($('input[name="operation"]').length) {
-                    $('input[name="operation"]').val('decline');
+                    $('input[name="operation"]').val('declined_or_cancelled');
                 }
 
                 // Submit my parent form.
