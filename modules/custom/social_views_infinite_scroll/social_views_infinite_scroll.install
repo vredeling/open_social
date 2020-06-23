@@ -11,12 +11,5 @@
  * Perform actions related to the installation of social_views_infinite_scroll.
  */
 function social_views_infinite_scroll_install() {
-  $roles = [
-    'sitemanager',
-    'administrator',
-  ];
-
-  foreach ($roles as $role) {
-    user_role_grant_permissions($role, ['administer social_infinite_scroll']);
-  }
+  user_role_grant_permissions('sitemanager', ['administer social_infinite_scroll']);
 }
