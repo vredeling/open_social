@@ -1,4 +1,4 @@
-@api @stability @event @views-infinite-scroll
+@api @stability @FOR-293 @stability-4 @event @views-infinite-scroll
 
 Feature: Enable social infinite scroll feature
   Benefit: In order to see infinite scroll instead of default pager

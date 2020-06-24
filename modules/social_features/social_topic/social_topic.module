@@ -91,7 +91,6 @@ function social_topic_form_views_exposed_form_alter(&$form, FormStateInterface $
   }
   // On group topics overview.
   if ($form['#id'] === 'views-exposed-form-group-topics-page-group-topics') {
-    /** @var \Drupal\group\Entity\GroupInterface $group_from_route */
     $group_from_route = _social_group_get_current_group();
 
     $current_user = \Drupal::currentUser();
@@ -160,7 +159,6 @@ function social_topic_views_query_alter(ViewExecutable $view, QueryPluginBase $q
   // Only show the unpublished option when you are member of the group.
   // You can't place content in a group you are not a member of anyway.
   if ($view->id() == 'group_topics' && $view->getDisplay()->display['id'] == 'page_group_topics') {
-    /** @var \Drupal\group\Entity\GroupInterface $group_from_route */
     $group_from_route = _social_group_get_current_group();
     if ($group_from_route instanceof GroupInterface) {
       $current_user = \Drupal::currentUser();

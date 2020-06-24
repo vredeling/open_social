@@ -76,7 +76,6 @@ class SocialGroupViewsBulkOperationsBulkForm extends ViewsBulkOperationsBulkForm
       return;
     }
 
-    /** @var \Drupal\group\Entity\GroupInterface $group */
     $group = _social_group_get_current_group();
     $tempstoreData = $this->getTempstoreData($this->view->id(), $this->view->current_display);
     // Make sure the selection is saved for the current group.
