@@ -57,9 +57,10 @@ class SocialScrollOverride implements ConfigFactoryOverrideInterface {
         $pages = [];
 
         foreach ($displays as $id => $display) {
-          if ($display['display_plugin'] !== 'block') {
-            $pages[] = $id;
+          if (!isset($display['display_options']['pager']) || $display['display_plugin'] === 'block') {
+            continue;
           }
+          $pages[] = $id;
         }
 
         foreach ($pages as $display_page) {
