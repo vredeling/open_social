@@ -15,11 +15,11 @@ use Drupal\social_scroll\SocialScrollManagerInterface;
 function social_scroll_form_view_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   /** @var \Drupal\social_scroll\SocialScrollManagerInterface $social_infinite_scroll_manager */
   $social_infinite_scroll_manager = \Drupal::service('social_scroll.manager');
-  $enabled_views = array_keys($social_infinite_scroll_manager->getEnabledViews());
+  $enabled_views = array_keys($social_infinite_scroll_manager->getEnabledViewIds());
   $display_id = $form_state->get('display_id');
 
   foreach ($enabled_views as $view) {
-    $config_name = str_replace('__', '.', $view);
+    $config_name = $social_infinite_scroll_manager->getConfigName($view);
     $current_view = \Drupal::configFactory()->getEditable($config_name);
     $displays = $current_view->getOriginal('display');
     $pages = [];

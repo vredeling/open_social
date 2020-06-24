@@ -29,15 +29,15 @@ class SocialScrollManager implements SocialScrollManagerInterface {
   /**
    * {@inheritdoc}
    */
-  public function getAllAvailableViews() {
+  public function getAllAvailableViewIds() {
     return $this->configFactory->getEditable('social_scroll.settings')->getOriginal('views_list');
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getEnabledViews() {
-    $all_views = $this->getAllAvailableViews();
+  public function getEnabledViewIds() {
+    $all_views = $this->getAllAvailableViewIds();
     $enabled_views = [];
 
     if (is_array($all_views)) {
@@ -54,39 +54,46 @@ class SocialScrollManager implements SocialScrollManagerInterface {
   /**
    * {@inheritdoc}
    */
-  public function getBlockedViews() {
+  public function getBlockedViewIds() {
     return [
       // Some system or distro views.
-      'views.view.who_voted_this_entity',
-      'views.view.who_liked_this_entity',
-      'views.view.watchdog',
-      'views.view.user_admin_people',
-      'views.view.report_overview',
-      'views.view.redirect',
-      'views.view.recipient_group_reference',
-      'views.view.inbox',
-      'views.view.featured_profile_reference',
-      'views.view.featured_group_reference',
-      'views.view.featured_content_reference',
-      'views.view.event_manage_enrollments',
-      'views.view.event_enrollments',
-      'views.view.content',
-      'views.view.community_activities',
-      'views.view.comment',
-      'views.view.activity_stream_profile',
-      'views.view.activity_stream_notifications',
-      'views.view.activity_stream_group',
-      'views.view.activity_stream',
+      'who_voted_this_entity',
+      'who_liked_this_entity',
+      'watchdog',
+      'user_admin_people',
+      'report_overview',
+      'redirect',
+      'recipient_group_reference',
+      'inbox',
+      'featured_profile_reference',
+      'featured_group_reference',
+      'featured_content_reference',
+      'event_manage_enrollments',
+      'event_enrollments',
+      'content',
+      'community_activities',
+      'comment',
+      'activity_stream_profile',
+      'activity_stream_notifications',
+      'activity_stream_group',
+      'activity_stream',
       // Temporarily here because ajax does not work correctly with these views,
       // probably because of we have a lot config overrides for these views.
-      'views.view.search_all',
-      'views.view.search_all_autocomplete',
-      'views.view.search_content',
-      'views.view.search_groups',
-      'views.view.search_users',
+      'search_all',
+      'search_all_autocomplete',
+      'search_content',
+      'search_groups',
+      'search_users',
       // Replace the results to no result.
-      'views.view.events',
+      'events',
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getConfigName($view_id) {
+    return 'views.view.' . $view_id;
   }
 
 }

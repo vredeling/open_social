@@ -31,7 +31,7 @@ class SocialScrollSettingsForm extends ConfigFormBase implements ContainerInject
    *
    * @var \Drupal\social_scroll\SocialScrollManager
    */
-  protected $SocialScrollManager;
+  protected $socialScrollManager;
 
   /**
    * SocialScrollSettingsForm constructor.
@@ -46,7 +46,7 @@ class SocialScrollSettingsForm extends ConfigFormBase implements ContainerInject
   public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $moduleHandler, SocialScrollManager $social_infinite_scroll_manager) {
     parent::__construct($config_factory);
     $this->moduleHandler = $moduleHandler;
-    $this->SocialScrollManager = $social_infinite_scroll_manager;
+    $this->socialScrollManager = $social_infinite_scroll_manager;
   }
 
   /**
@@ -79,11 +79,12 @@ class SocialScrollSettingsForm extends ConfigFormBase implements ContainerInject
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $all_views = $this->configFactory->listAll('views');
-    $blocked_views = $this->SocialScrollManager->getBlockedViews();
+    $all_views = array_map(function ($view_id) {
+      return str_replace('views.view.', '', $view_id);
+    }, $this->configFactory->listAll('views'));
+
+    $blocked_views = $this->socialScrollManager->getBlockedViewIds();
     $views = array_diff($all_views, $blocked_views);
-    // Get the configuration file.
-    $config = $this->config(self::CONFIG_NAME);
 
     $form['page_display'] = [
       '#type' => 'item',
@@ -111,18 +112,16 @@ class SocialScrollSettingsForm extends ConfigFormBase implements ContainerInject
 
     $options = [];
     foreach ($views as $view) {
-      $label = $this->configFactory->getEditable($view)->getOriginal('label');
-      $changed_view_id = str_replace('.', '__', $view);
-
+      $label = $this->configFactory->getEditable($this->socialScrollManager->getConfigName($view))->getOriginal('label');
       if ($label) {
-        $options[$changed_view_id] = $label;
+        $options[$view] = $label;
       }
     }
 
     $form['settings']['views']['list'] = [
       '#type' => 'checkboxes',
       '#options' => $options,
-      '#default_value' => array_keys($this->SocialScrollManager->getEnabledViews()),
+      '#default_value' => array_keys($this->socialScrollManager->getEnabledViewIds()),
     ];
 
     return parent::buildForm($form, $form_state);
@@ -134,12 +133,6 @@ class SocialScrollSettingsForm extends ConfigFormBase implements ContainerInject
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = $this->config(self::CONFIG_NAME);
     $views_list = $form_state->getValues()['list'];
-
-    foreach ($views_list as $key => $value) {
-      if (strpos($key, 'views__') === FALSE) {
-        unset($views_list[$key]);
-      }
-    }
 
     $config->set('views_list', $views_list)
       ->set('button_text', $form_state->getValue('button_text'))

@@ -26,7 +26,7 @@ class SocialScrollOverride implements ConfigFactoryOverrideInterface {
    *
    * @var \Drupal\social_scroll\SocialScrollManager
    */
-  protected $SocialScrollManager;
+  protected $socialScrollManager;
 
   /**
    * Constructs the configuration override.
@@ -38,18 +38,18 @@ class SocialScrollOverride implements ConfigFactoryOverrideInterface {
    */
   public function __construct(ConfigFactoryInterface $config_factory, SocialScrollManager $social_infinite_scroll_manager) {
     $this->configFactory = $config_factory;
-    $this->SocialScrollManager = $social_infinite_scroll_manager;
+    $this->socialScrollManager = $social_infinite_scroll_manager;
   }
 
   /**
-   * Load overrides.
+   * {@inheritdoc}
    */
   public function loadOverrides($names) {
     $overrides = [];
-    $enabled_views = $this->SocialScrollManager->getEnabledViews();
+    $enabled_views = $this->socialScrollManager->getEnabledViewIds();
 
     foreach ($enabled_views as $key => $status) {
-      $config_name = str_replace('__', '.', $key);
+      $config_name = $this->socialScrollManager->getConfigName($key);
 
       if (in_array($config_name, $names)) {
         $current_view = $this->configFactory->getEditable($config_name);
