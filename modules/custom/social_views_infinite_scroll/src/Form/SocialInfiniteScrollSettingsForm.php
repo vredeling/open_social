@@ -125,8 +125,7 @@ class SocialInfiniteScrollSettingsForm extends ConfigFormBase implements Contain
 
     foreach ($values as $key => $value) {
       if (strpos($key, 'views') !== FALSE) {
-        $config_name = str_replace('__', '.', $key);
-        $config->set($config_name, $value);
+        $config->set($key, $value);
       }
     }
     $config->save();

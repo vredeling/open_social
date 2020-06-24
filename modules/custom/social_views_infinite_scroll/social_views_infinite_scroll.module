@@ -18,7 +18,8 @@ function social_views_infinite_scroll_form_view_edit_form_alter(&$form, FormStat
   $enabled_views = array_keys($social_infinite_scroll_manager->getEnabledViews());
   $display_id = $form_state->get('display_id');
 
-  foreach ($enabled_views as $config_name) {
+  foreach ($enabled_views as $view) {
+    $config_name = str_replace('__', '.', $view);
     $current_view = \Drupal::configFactory()->getEditable($config_name);
     $displays = $current_view->getOriginal('display');
     $pages = [];
