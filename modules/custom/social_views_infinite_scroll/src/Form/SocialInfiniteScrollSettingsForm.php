@@ -90,7 +90,7 @@ class SocialInfiniteScrollSettingsForm extends ConfigFormBase implements Contain
       '#title' => $this->t('Here\'s a list of views that have a "page" display.'),
     ];
 
-    $form['settings']['views'] = [
+    $form['settings']['views_list'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Views'),
     ];
@@ -100,13 +100,12 @@ class SocialInfiniteScrollSettingsForm extends ConfigFormBase implements Contain
       $changed_view_id = str_replace('.', '__', $view);
 
       if ($label) {
-        $value = $config->get($changed_view_id);
-        $default_value = !empty($value) ? $config->get($changed_view_id) : FALSE;
+        $value = $config->getOriginal('views_list.' . $changed_view_id);
 
-        $form['settings']['views'][$changed_view_id] = [
+        $form['settings']['views_list'][$changed_view_id] = [
           '#type' => 'checkbox',
           '#title' => $label,
-          '#default_value' => $default_value,
+          '#default_value' => ($value) ?: FALSE,
           '#required' => FALSE,
         ];
       }
@@ -124,10 +123,11 @@ class SocialInfiniteScrollSettingsForm extends ConfigFormBase implements Contain
     $values = $form_state->getValues();
 
     foreach ($values as $key => $value) {
-      if (strpos($key, 'views') !== FALSE) {
-        $config->set($key, $value);
+      if (strpos($key, 'views') === FALSE) {
+        unset($values[$key]);
       }
     }
+    $config->set('views_list', $values);
     $config->save();
 
     parent::submitForm($form, $form_state);

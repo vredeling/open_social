@@ -30,7 +30,7 @@ class SocialInfiniteScrollManager implements SocialInfiniteScrollManagerInterfac
    * {@inheritdoc}
    */
   public function getAllAvailableViews() {
-    return $this->configFactory->getEditable('social_views_infinite_scroll.settings')->getOriginal();
+    return $this->configFactory->getEditable('social_views_infinite_scroll.settings')->getOriginal('views_list');
   }
 
   /**
@@ -40,9 +40,11 @@ class SocialInfiniteScrollManager implements SocialInfiniteScrollManagerInterfac
     $all_views = $this->getAllAvailableViews();
     $enabled_views = [];
 
-    foreach ($all_views as $key => $status) {
-      if ($status) {
-        $enabled_views[$key] = $status;
+    if (is_array($all_views)) {
+      foreach ($all_views as $key => $status) {
+        if ($status) {
+          $enabled_views[$key] = $status;
+        }
       }
     }
 
