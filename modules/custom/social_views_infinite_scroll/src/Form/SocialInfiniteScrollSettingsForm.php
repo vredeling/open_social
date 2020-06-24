@@ -90,6 +90,20 @@ class SocialInfiniteScrollSettingsForm extends ConfigFormBase implements Contain
       '#title' => $this->t('Here\'s a list of views that have a "page" display.'),
     ];
 
+    $form['settings']['button_text'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Button Text'),
+      '#default_value' => $this->t('Load More'),
+      '#maxlength' => '255',
+    ];
+
+    $form['settings']['automatically_load_content'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Automatically Load Content'),
+      '#description' => $this->t('Automatically load subsequent pages as the user scrolls.'),
+      '#default_value' => TRUE,
+    ];
+
     $form['settings']['views_list'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Views'),
@@ -118,17 +132,19 @@ class SocialInfiniteScrollSettingsForm extends ConfigFormBase implements Contain
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // Get the configuration file.
     $config = $this->config(self::CONFIG_NAME);
     $values = $form_state->getValues();
 
     foreach ($values as $key => $value) {
-      if (strpos($key, 'views') === FALSE) {
+      if (strpos($key, 'views__') === FALSE) {
         unset($values[$key]);
       }
     }
-    $config->set('views_list', $values);
-    $config->save();
+
+    $config->set('views_list', $values)
+      ->set('button_text', $form_state->getValue('button_text'))
+      ->set('automatically_load_content', $form_state->getValue('automatically_load_content'))
+      ->save();
 
     parent::submitForm($form, $form_state);
   }

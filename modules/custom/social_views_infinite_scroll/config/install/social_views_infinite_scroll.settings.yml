@@ -5,3 +5,5 @@ views_list:
   views__view__newest_groups: 1
   views__view__newest_users: 1
   views__view__upcoming_events: 1
+button_text: 'Load More'
+automatically_load_content: 1

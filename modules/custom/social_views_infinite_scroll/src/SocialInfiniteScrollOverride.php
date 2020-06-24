@@ -63,14 +63,18 @@ class SocialInfiniteScrollOverride implements ConfigFactoryOverrideInterface {
         }
 
         foreach ($pages as $display_page) {
+          $scroll_config = $this->configFactory->getEditable('social_views_infinite_scroll.settings');
+          $button_text = $scroll_config->getOriginal('button_text');
+          $automatically_load_content = $scroll_config->getOriginal('automatically_load_content');
+
           $display_options = $current_view->getOriginal('display.' . $display_page . '.display_options');
           $overrides[$config_name]['display'][$display_page]['display_options'] = array_merge($display_options, [
             'pager' => [
               'type' => 'infinite_scroll',
               'options' => [
                 'views_infinite_scroll' => [
-                  'button_text' => 'Load More',
-                  'automatically_load_content' => FALSE,
+                  'button_text' => $button_text,
+                  'automatically_load_content' => $automatically_load_content,
                 ],
               ],
             ],
