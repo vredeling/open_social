@@ -1,13 +1,13 @@
 <?php
 
-namespace Drupal\social_views_infinite_scroll;
+namespace Drupal\social_scroll;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
- * Class SocialInfiniteScrollManager.
+ * Class SocialScrollManager.
  */
-class SocialInfiniteScrollManager implements SocialInfiniteScrollManagerInterface {
+class SocialScrollManager implements SocialScrollManagerInterface {
 
   /**
    * The config factory interface.
@@ -17,7 +17,7 @@ class SocialInfiniteScrollManager implements SocialInfiniteScrollManagerInterfac
   protected $configFactory;
 
   /**
-   * Constructs a new SocialInfiniteScrollManager object.
+   * Constructs a new SocialScrollManager object.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The config factory interface.
@@ -30,7 +30,7 @@ class SocialInfiniteScrollManager implements SocialInfiniteScrollManagerInterfac
    * {@inheritdoc}
    */
   public function getAllAvailableViews() {
-    return $this->configFactory->getEditable('social_views_infinite_scroll.settings')->getOriginal('views_list');
+    return $this->configFactory->getEditable('social_scroll.settings')->getOriginal('views_list');
   }
 
   /**

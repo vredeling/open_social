@@ -1,0 +1,12 @@
+services:
+  social_scroll.override:
+    class: Drupal\social_scroll\SocialScrollOverride
+    arguments:
+      - '@config.factory'
+      - '@social_scroll.manager'
+    tags:
+      - { name: config.factory.override, priority: 50 }
+  social_scroll.manager:
+    class: Drupal\social_scroll\SocialScrollManager
+    arguments:
+      - '@config.factory'

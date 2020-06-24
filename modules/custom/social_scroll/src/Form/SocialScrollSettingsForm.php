@@ -1,23 +1,23 @@
 <?php
 
-namespace Drupal\social_views_infinite_scroll\Form;
+namespace Drupal\social_scroll\Form;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\social_views_infinite_scroll\SocialInfiniteScrollManager;
+use Drupal\social_scroll\SocialScrollManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class SocialInfiniteScrollSettingsForm.
+ * Class SocialScrollSettingsForm.
  *
- * @package Drupal\social_views_infinite_scroll\Form
+ * @package Drupal\social_scroll\Form
  */
-class SocialInfiniteScrollSettingsForm extends ConfigFormBase implements ContainerInjectionInterface {
+class SocialScrollSettingsForm extends ConfigFormBase implements ContainerInjectionInterface {
 
-  const CONFIG_NAME = 'social_views_infinite_scroll.settings';
+  const CONFIG_NAME = 'social_scroll.settings';
 
   /**
    * The Module Handler.
@@ -27,26 +27,26 @@ class SocialInfiniteScrollSettingsForm extends ConfigFormBase implements Contain
   protected $moduleHandler;
 
   /**
-   * The SocialInfiniteScrollManager manager.
+   * The SocialScrollManager manager.
    *
-   * @var \Drupal\social_views_infinite_scroll\SocialInfiniteScrollManager
+   * @var \Drupal\social_scroll\SocialScrollManager
    */
-  protected $socialInfiniteScrollManager;
+  protected $SocialScrollManager;
 
   /**
-   * SocialInfiniteScrollSettingsForm constructor.
+   * SocialScrollSettingsForm constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The config factory service.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
    *   The module handler service.
-   * @param \Drupal\social_views_infinite_scroll\SocialInfiniteScrollManager $social_infinite_scroll_manager
-   *   The SocialInfiniteScrollManager manager.
+   * @param \Drupal\social_scroll\SocialScrollManager $social_infinite_scroll_manager
+   *   The SocialScrollManager manager.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $moduleHandler, SocialInfiniteScrollManager $social_infinite_scroll_manager) {
+  public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $moduleHandler, SocialScrollManager $social_infinite_scroll_manager) {
     parent::__construct($config_factory);
     $this->moduleHandler = $moduleHandler;
-    $this->socialInfiniteScrollManager = $social_infinite_scroll_manager;
+    $this->SocialScrollManager = $social_infinite_scroll_manager;
   }
 
   /**
@@ -57,7 +57,7 @@ class SocialInfiniteScrollSettingsForm extends ConfigFormBase implements Contain
     return new static(
       $container->get('config.factory'),
       $container->get('module_handler'),
-      $container->get('social_views_infinite_scroll.manager')
+      $container->get('social_scroll.manager')
     );
   }
 
@@ -65,7 +65,7 @@ class SocialInfiniteScrollSettingsForm extends ConfigFormBase implements Contain
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'social_views_infinite_scroll_settings';
+    return 'social_scroll_settings';
   }
 
   /**
@@ -80,7 +80,7 @@ class SocialInfiniteScrollSettingsForm extends ConfigFormBase implements Contain
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $all_views = $this->configFactory->listAll('views');
-    $blocked_views = $this->socialInfiniteScrollManager->getBlockedViews();
+    $blocked_views = $this->SocialScrollManager->getBlockedViews();
     $views = array_diff($all_views, $blocked_views);
     // Get the configuration file.
     $config = $this->config(self::CONFIG_NAME);
@@ -104,26 +104,26 @@ class SocialInfiniteScrollSettingsForm extends ConfigFormBase implements Contain
       '#default_value' => TRUE,
     ];
 
-    $form['settings']['views_list'] = [
+    $form['settings']['views'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Views'),
     ];
 
+    $options = [];
     foreach ($views as $view) {
       $label = $this->configFactory->getEditable($view)->getOriginal('label');
       $changed_view_id = str_replace('.', '__', $view);
 
       if ($label) {
-        $value = $config->getOriginal('views_list.' . $changed_view_id);
-
-        $form['settings']['views_list'][$changed_view_id] = [
-          '#type' => 'checkbox',
-          '#title' => $label,
-          '#default_value' => ($value) ?: FALSE,
-          '#required' => FALSE,
-        ];
+        $options[$changed_view_id] = $label;
       }
     }
+
+    $form['settings']['views']['list'] = [
+      '#type' => 'checkboxes',
+      '#options' => $options,
+      '#default_value' => array_keys($this->SocialScrollManager->getEnabledViews()),
+    ];
 
     return parent::buildForm($form, $form_state);
   }
@@ -133,15 +133,15 @@ class SocialInfiniteScrollSettingsForm extends ConfigFormBase implements Contain
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = $this->config(self::CONFIG_NAME);
-    $values = $form_state->getValues();
+    $views_list = $form_state->getValues()['list'];
 
-    foreach ($values as $key => $value) {
+    foreach ($views_list as $key => $value) {
       if (strpos($key, 'views__') === FALSE) {
-        unset($values[$key]);
+        unset($views_list[$key]);
       }
     }
 
-    $config->set('views_list', $values)
+    $config->set('views_list', $views_list)
       ->set('button_text', $form_state->getValue('button_text'))
       ->set('automatically_load_content', $form_state->getValue('automatically_load_content'))
       ->save();

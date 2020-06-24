@@ -57,6 +57,7 @@ projects[group][patch][] = "https://www.drupal.org/files/issues/2018-11-01/30108
 projects[group][patch][] = "https://www.drupal.org/files/issues/2019-12-04/group-3098675-2.patch"
 projects[group][patch][] = "https://www.drupal.org/files/issues/2019-07-04/group-request_membership_feature_grequest_module-2752603-110.patch"
 projects[group][patch][] = "https://www.drupal.org/files/issues/2020-03-26/ginvite_module_port-2801603-112.patch"
+projects[group][patch][] = "https://www.drupal.org/files/issues/2019-06-27/group_route_ajax_route-2942657-18.patch"
 projects[image_effects][type] = module
 projects[image_effects][version] = 2.3
 projects[image_widget_crop][type] = module

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\social_views_infinite_scroll;
+namespace Drupal\social_scroll;
 
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -8,11 +8,11 @@ use Drupal\Core\Config\ConfigFactoryOverrideInterface;
 use Drupal\Core\Config\StorageInterface;
 
 /**
- * Class SocialInfiniteScrollOverride.
+ * Class SocialScrollOverride.
  *
- * @package Drupal\social_views_infinite_scroll
+ * @package Drupal\social_scroll
  */
-class SocialInfiniteScrollOverride implements ConfigFactoryOverrideInterface {
+class SocialScrollOverride implements ConfigFactoryOverrideInterface {
 
   /**
    * The config factory.
@@ -22,23 +22,23 @@ class SocialInfiniteScrollOverride implements ConfigFactoryOverrideInterface {
   protected $configFactory;
 
   /**
-   * The SocialInfiniteScrollManager manager.
+   * The SocialScrollManager manager.
    *
-   * @var \Drupal\social_views_infinite_scroll\SocialInfiniteScrollManager
+   * @var \Drupal\social_scroll\SocialScrollManager
    */
-  protected $socialInfiniteScrollManager;
+  protected $SocialScrollManager;
 
   /**
    * Constructs the configuration override.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The config factory.
-   * @param \Drupal\social_views_infinite_scroll\SocialInfiniteScrollManager $social_infinite_scroll_manager
-   *   The SocialInfiniteScrollManager manager.
+   * @param \Drupal\social_scroll\SocialScrollManager $social_infinite_scroll_manager
+   *   The SocialScrollManager manager.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, SocialInfiniteScrollManager $social_infinite_scroll_manager) {
+  public function __construct(ConfigFactoryInterface $config_factory, SocialScrollManager $social_infinite_scroll_manager) {
     $this->configFactory = $config_factory;
-    $this->socialInfiniteScrollManager = $social_infinite_scroll_manager;
+    $this->SocialScrollManager = $social_infinite_scroll_manager;
   }
 
   /**
@@ -46,7 +46,7 @@ class SocialInfiniteScrollOverride implements ConfigFactoryOverrideInterface {
    */
   public function loadOverrides($names) {
     $overrides = [];
-    $enabled_views = $this->socialInfiniteScrollManager->getEnabledViews();
+    $enabled_views = $this->SocialScrollManager->getEnabledViews();
 
     foreach ($enabled_views as $key => $status) {
       $config_name = str_replace('__', '.', $key);
@@ -63,7 +63,7 @@ class SocialInfiniteScrollOverride implements ConfigFactoryOverrideInterface {
         }
 
         foreach ($pages as $display_page) {
-          $scroll_config = $this->configFactory->getEditable('social_views_infinite_scroll.settings');
+          $scroll_config = $this->configFactory->getEditable('social_scroll.settings');
           $button_text = $scroll_config->getOriginal('button_text');
           $automatically_load_content = $scroll_config->getOriginal('automatically_load_content');
 
@@ -92,7 +92,7 @@ class SocialInfiniteScrollOverride implements ConfigFactoryOverrideInterface {
    * {@inheritdoc}
    */
   public function getCacheSuffix() {
-    return 'SocialInfiniteScrollOverride';
+    return 'SocialScrollOverride';
   }
 
   /**

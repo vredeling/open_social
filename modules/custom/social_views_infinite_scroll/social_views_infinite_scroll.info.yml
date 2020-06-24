@@ -1,8 +1,0 @@
-name: Social Views Infinite Scroll
-description: 'Social Views Infinite Scroll'
-type: module
-core: 8.x
-package: Social
-configure: social_views_infinite_scroll.settings
-dependencies:
-  - views_infinite_scroll:views_infinite_scroll

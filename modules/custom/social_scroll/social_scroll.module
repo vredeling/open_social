@@ -2,19 +2,19 @@
 
 /**
  * @file
- * Contains social_views_infinite_scroll.module.
+ * Contains social_scroll.module.
  */
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
-use Drupal\social_views_infinite_scroll\SocialInfiniteScrollManagerInterface;
+use Drupal\social_scroll\SocialScrollManagerInterface;
 
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function social_views_infinite_scroll_form_view_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  /** @var \Drupal\social_views_infinite_scroll\SocialInfiniteScrollManagerInterface $social_infinite_scroll_manager */
-  $social_infinite_scroll_manager = \Drupal::service('social_views_infinite_scroll.manager');
+function social_scroll_form_view_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  /** @var \Drupal\social_scroll\SocialScrollManagerInterface $social_infinite_scroll_manager */
+  $social_infinite_scroll_manager = \Drupal::service('social_scroll.manager');
   $enabled_views = array_keys($social_infinite_scroll_manager->getEnabledViews());
   $display_id = $form_state->get('display_id');
 
@@ -38,11 +38,11 @@ function social_views_infinite_scroll_form_view_edit_form_alter(&$form, FormStat
       /** @var \Drupal\views_ui\ViewEditForm $form_object */
       $form_object = $form_state->getFormObject();
       $module_name = \Drupal::moduleHandler()
-        ->getName(SocialInfiniteScrollManagerInterface::MODULE_NAME);
+        ->getName(SocialScrollManagerInterface::MODULE_NAME);
       $form_object->messenger()
         ->addWarning(t('You cannot change the pager settings because it is overridden by the "@module_name" module. You can change the settings @here', [
           '@module_name' => $module_name,
-          '@here' => Link::createFromRoute('here', 'social_views_infinite_scroll.settings')
+          '@here' => Link::createFromRoute('here', 'social_scroll.settings')
             ->toString(),
         ]));
     }
