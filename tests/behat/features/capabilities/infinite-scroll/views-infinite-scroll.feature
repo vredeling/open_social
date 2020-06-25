@@ -5,7 +5,7 @@ Feature: Enable social infinite scroll feature
   Role: LU
   Goal/desire: I want to use infinite scroll for specific views
 
-  Scenario: Successfully enable social_views_infinite_scroll module
+  Scenario: Successfully enable social_scroll module
     Given users:
       | name             | mail                    | status | roles       |
       | behatsitemanager | sitemanager@example.com | 1      | sitemanager |
