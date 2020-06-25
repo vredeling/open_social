@@ -58,3 +58,5 @@ Feature: Enable social infinite scroll feature
     When I click "Load More"
     And I wait for AJAX to finish
     And I should see "Event 5"
+
+    And I disable the module "social_scroll"
