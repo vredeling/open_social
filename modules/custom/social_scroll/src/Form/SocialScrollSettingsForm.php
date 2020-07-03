@@ -85,6 +85,7 @@ class SocialScrollSettingsForm extends ConfigFormBase implements ContainerInject
 
     $blocked_views = $this->socialScrollManager->getBlockedViewIds();
     $views = array_diff($all_views, $blocked_views);
+    $config = $this->config(self::CONFIG_NAME);
 
     $form['page_display'] = [
       '#type' => 'item',
@@ -94,7 +95,7 @@ class SocialScrollSettingsForm extends ConfigFormBase implements ContainerInject
     $form['settings']['button_text'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Button Text'),
-      '#default_value' => $this->t('Load More'),
+      '#default_value' => $config->get('button_text'),
       '#maxlength' => '255',
     ];
 
@@ -102,7 +103,7 @@ class SocialScrollSettingsForm extends ConfigFormBase implements ContainerInject
       '#type' => 'checkbox',
       '#title' => $this->t('Automatically Load Content'),
       '#description' => $this->t('Automatically load subsequent pages as the user scrolls.'),
-      '#default_value' => TRUE,
+      '#default_value' => $config->get('automatically_load_content'),
     ];
 
     $form['settings']['views'] = [
