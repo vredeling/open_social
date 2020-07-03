@@ -4,4 +4,4 @@ social_scroll.settings:
     _form: '\Drupal\social_scroll\Form\SocialScrollSettingsForm'
     _title: 'Infinite Scroll Settings'
   requirements:
-    _permission: 'administer social_infinite_scroll'
+    _permission: 'administer social_scroll'
