@@ -113,9 +113,23 @@ class SocialScrollSettingsForm extends ConfigFormBase implements ContainerInject
 
     $options = [];
     foreach ($views as $view) {
-      $label = $this->configFactory->getEditable($this->socialScrollManager->getConfigName($view))->getOriginal('label');
+      $current_view = $this->configFactory->getEditable($this->socialScrollManager->getConfigName($view));
+      $label = $current_view->getOriginal('label');
+
       if ($label) {
-        $options[$view] = $label;
+        $displays = $current_view->getOriginal('display');
+        unset($displays['default']);
+        $pages = [];
+
+        foreach ($displays as $id => $display) {
+          if ($display['display_plugin'] !== 'block') {
+            $pages[] = $id;
+          }
+        }
+
+        if (!empty($pages)) {
+          $options[$view] = $label;
+        }
       }
     }
 
