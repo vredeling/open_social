@@ -6,7 +6,7 @@ social_scroll.settings:
       type: sequence
       label: 'Enable scroll for this view'
       sequence:
-        type: string
+        type: boolean
     button_text:
       type: string
       label: 'Button text'

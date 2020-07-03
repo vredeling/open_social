@@ -1,5 +1,5 @@
 social_scroll.settings:
-  path: '/admin/config/opensocial/infinite-scroll'
+  path: '/admin/config/opensocial/scroll'
   defaults:
     _form: '\Drupal\social_scroll\Form\SocialScrollSettingsForm'
     _title: 'Infinite Scroll Settings'

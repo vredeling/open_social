@@ -31,7 +31,7 @@ Feature: Enable social infinite scroll feature
 
     Given I enable the module "social_scroll"
     Given I am logged in as "behatsitemanager"
-    When I am on "/admin/config/opensocial/infinite-scroll"
+    When I am on "/admin/config/opensocial/scroll"
     Then I should see checked the box "(Upcoming) Community events"
 
   Scenario: Successfully use infinite scroll

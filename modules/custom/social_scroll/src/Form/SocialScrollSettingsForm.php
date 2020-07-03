@@ -40,13 +40,13 @@ class SocialScrollSettingsForm extends ConfigFormBase implements ContainerInject
    *   The config factory service.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
    *   The module handler service.
-   * @param \Drupal\social_scroll\SocialScrollManager $social_infinite_scroll_manager
+   * @param \Drupal\social_scroll\SocialScrollManager $social_scroll_manager
    *   The SocialScrollManager manager.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $moduleHandler, SocialScrollManager $social_infinite_scroll_manager) {
+  public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $moduleHandler, SocialScrollManager $social_scroll_manager) {
     parent::__construct($config_factory);
     $this->moduleHandler = $moduleHandler;
-    $this->socialScrollManager = $social_infinite_scroll_manager;
+    $this->socialScrollManager = $social_scroll_manager;
   }
 
   /**

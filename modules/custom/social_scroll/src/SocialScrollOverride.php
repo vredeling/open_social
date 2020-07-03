@@ -33,12 +33,12 @@ class SocialScrollOverride implements ConfigFactoryOverrideInterface {
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The config factory.
-   * @param \Drupal\social_scroll\SocialScrollManager $social_infinite_scroll_manager
+   * @param \Drupal\social_scroll\SocialScrollManager $social_scroll_manager
    *   The SocialScrollManager manager.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, SocialScrollManager $social_infinite_scroll_manager) {
+  public function __construct(ConfigFactoryInterface $config_factory, SocialScrollManager $social_scroll_manager) {
     $this->configFactory = $config_factory;
-    $this->socialScrollManager = $social_infinite_scroll_manager;
+    $this->socialScrollManager = $social_scroll_manager;
   }
 
   /**
@@ -54,20 +54,20 @@ class SocialScrollOverride implements ConfigFactoryOverrideInterface {
       if (in_array($config_name, $names)) {
         $current_view = $this->configFactory->getEditable($config_name);
         $displays = $current_view->getOriginal('display');
+
+        $scroll_config = $this->configFactory->getEditable('social_scroll.settings');
+        $button_text = $scroll_config->getOriginal('button_text');
+        $automatically_load_content = $scroll_config->getOriginal('automatically_load_content');
+
         $pages = [];
 
         foreach ($displays as $id => $display) {
-          if (!isset($display['display_options']['pager']) || $display['display_plugin'] === 'block') {
-            continue;
+          if (isset($display['display_options']['pager']) || $display['display_plugin'] !== 'block') {
+            $pages[] = $id;
           }
-          $pages[] = $id;
         }
 
         foreach ($pages as $display_page) {
-          $scroll_config = $this->configFactory->getEditable('social_scroll.settings');
-          $button_text = $scroll_config->getOriginal('button_text');
-          $automatically_load_content = $scroll_config->getOriginal('automatically_load_content');
-
           $display_options = $current_view->getOriginal('display.' . $display_page . '.display_options');
           $overrides[$config_name]['display'][$display_page]['display_options'] = array_merge($display_options, [
             'pager' => [
@@ -79,8 +79,8 @@ class SocialScrollOverride implements ConfigFactoryOverrideInterface {
                 ],
               ],
             ],
+            'use_ajax' => TRUE,
           ]);
-          $overrides[$config_name]['display'][$display_page]['display_options']['use_ajax'] = TRUE;
         }
 
       }
