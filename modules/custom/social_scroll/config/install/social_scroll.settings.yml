@@ -6,4 +6,4 @@ views_list:
   newest_users: true
   upcoming_events: true
 button_text: 'Load More'
-automatically_load_content: 0
+automatically_load_content: false
