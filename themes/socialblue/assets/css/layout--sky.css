@@ -1,240 +1,93 @@
-.socialblue--sky .region--title {
-  margin-top: 0;
-}
-
-.socialblue--sky .region--hero {
-  max-width: 100%;
-  margin-top: 0;
-}
-
-.socialblue--sky .region--hero .cover-wrap {
-  max-width: 1200px;
-  margin-right: auto;
-  margin-left: auto;
+.socialblue--sky .layout--with-complementary.sidebar-left > .region--complementary {
+  z-index: 10;
 }
 
 .socialblue--sky .region--secondary-navigation {
-  max-width: inherit;
   width: 100%;
-  margin: -44px 0 0;
-  position: relative;
-  z-index: 2;
-  padding-left: 0;
-  padding-right: 0;
 }
 
-.socialblue--sky .layout--with-complementary.sidebar-left .region--content {
-  -webkit-box-ordinal-group: 4;
-      -ms-flex-order: 3;
-          order: 3;
-}
-
-.socialblue--sky .layout--with-complementary.sidebar-left .region--complementary {
-  margin-top: 0;
-  padding: 0;
-  -webkit-box-ordinal-group: 1;
-      -ms-flex-order: 0;
-          order: 0;
-}
-
-.socialblue--sky .layout--with-complementary.sidebar-left .region--complementary_wrapper {
-  background: #fff;
-}
-
-.socialblue--sky .layout--with-complementary.sidebar-left .navbar-secondary {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 0 100%;
-          flex: 0 0 100%;
+.socialblue--sky.path-user .region--hero, .socialblue--sky.path-group .region--hero {
   max-width: 100%;
 }
 
-.socialblue--sky .layout--with-complementary.sidebar-left .region--secondary-navigation {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  z-index: 3;
-  -webkit-box-ordinal-group: 2;
-      -ms-flex-order: 1;
-          order: 1;
+.socialblue--sky.path-user .region--complementary-top, .socialblue--sky.path-group .region--complementary-top {
   margin-top: 0;
 }
 
-.socialblue--sky section:not(.content-merged) .content--side_wrapper-card.card {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-  background: transparent;
+.socialblue--sky.path-user .layout--with-complementary, .socialblue--sky.path-group .layout--with-complementary {
+  z-index: 2;
 }
 
-.socialblue--sky .region--complementary {
+.socialblue--sky.path-user .region--complementary, .socialblue--sky.path-group .region--complementary {
   position: relative;
-  margin-top: 1rem;
+  top: 1px;
 }
 
-body.socialblue--sky .region--complementary_wrapper {
+.socialblue--sky.path-user .region--secondary-navigation, .socialblue--sky.path-group .region--secondary-navigation {
   position: relative;
-  margin-bottom: 0;
-  z-index: 5;
-}
-
-body.socialblue--sky .layout--with-complementary:not(.sidebar-left) .region--complementary_wrapper.card {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-body.socialblue--sky.mode-search .region--complementary_wrapper {
-  z-index: 1;
-}
-
-body.socialblue--sky .region--complementary-bottom,
-body.socialblue--sky .region--complementary-top {
-  padding-bottom: 0;
-  border-radius: 0;
-}
-
-body.socialblue--sky.page-node-type-course-article .sidebar-left .region--complementary_wrapper {
-  border-radius: 10px !important;
-}
-
-body.socialblue--sky.page-node-type-course-article .sidebar-left .region--complementary_wrapper .region--complementary-top .block-course-section-navigation .card__block {
-  padding-bottom: 0;
-}
-
-body.socialblue--sky.page-node-type-course-article .sidebar-left .region--complementary_wrapper .region--complementary-top .block-course-section-navigation .card__block > .list-item:last-child {
-  padding-bottom: 0;
-}
-
-.block-course-material-navigation .complementary-title > a {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 1rem 1.25rem;
-  font-weight: 700;
-}
-
-.block-course-material-navigation .complementary-title > a .icon {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  width: 18px;
-  height: 18px;
-  margin-right: 10px;
-  border-radius: 50%;
-}
-
-.block-course-material-navigation .complementary-title > a svg {
-  width: 18px;
-  height: 18px;
-  fill: #fff;
-}
-
-@media (min-width: 600px) {
-  .socialblue--sky .region--hero .cover-wrap {
-    padding-top: 75px;
-    padding-bottom: 75px;
-  }
-  .socialblue--sky .region--hero .cover-wrap > .hero-footer {
-    bottom: 50px;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-  }
-  .socialblue--sky .region--hero .cover-wrap .hero-footer__text {
-    margin-left: 0;
-  }
-  .socialblue--sky .layout--with-complementary.sidebar-left .region--complementary-top > *[class*='statistic-block']:first-child:not(:last-child) {
-    border-bottom-right-radius: 0 !important;
-    border-bottom-left-radius: 0 !important;
-  }
+  z-index: 3;
 }
 
 @media (min-width: 900px) {
-  .socialblue--sky .region--secondary-navigation {
-    max-width: 100%;
-  }
-  .socialblue--sky .region--content {
-    margin-top: 20px;
-  }
-  .socialblue--sky .layout--with-complementary.sidebar-left .region--complementary {
-    padding-left: 1rem;
-    padding-right: 1rem;
+  .socialblue--sky .layout--with-complementary.sidebar-left > .region--complementary {
     -webkit-box-ordinal-group: 2;
         -ms-flex-order: 1;
             order: 1;
   }
-  .socialblue--sky .layout--with-complementary.sidebar-left .region--complementary_wrapper {
-    top: -43px;
-  }
-  .socialblue--sky .layout--with-complementary.sidebar-left .navbar-secondary {
-    -webkit-box-flex: 0;
-        -ms-flex: 0 0 66.66667%;
-            flex: 0 0 66.66667%;
-    max-width: 66.66667%;
-    -webkit-box-ordinal-group: 3;
-        -ms-flex-order: 2;
-            order: 2;
-  }
-  .socialblue--sky .layout--with-complementary.sidebar-left .region--secondary-navigation {
+  .socialblue--sky.path-user .layout--with-complementary .region--secondary-navigation, .socialblue--sky.path-group .layout--with-complementary .region--secondary-navigation {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    margin: -44px 0 0;
     padding-left: 2rem;
     padding-right: 1rem;
-    margin-top: -44px;
-    -webkit-box-ordinal-group: 1;
-        -ms-flex-order: 0;
-            order: 0;
   }
-  .socialblue--sky .region--complementary {
-    margin-top: 20px;
-    -webkit-box-ordinal-group: 4;
-        -ms-flex-order: 3;
-            order: 3;
-  }
-  body.socialblue--sky.page-node-type-course-article .sidebar-left .region--complementary_wrapper {
-    top: 0;
+  .socialblue--sky.path-user .region--complementary, .socialblue--sky.path-group .region--complementary {
+    top: -60px;
   }
 }
 
 @media (min-width: 1200px) {
-  .socialblue--sky .layout--with-complementary.sidebar-left .region--content {
-    padding-left: 20px;
-    padding-right: 0;
-  }
-  .socialblue--sky .layout--with-complementary.sidebar-left .region--complementary {
-    padding-right: 20px;
+  .socialblue--sky .layout--with-complementary.sidebar-left > .region--complementary {
+    padding-right: 1rem;
     padding-left: 0;
   }
-  .socialblue--sky .layout--with-complementary.sidebar-left .region--secondary-navigation {
-    padding-left: 30px;
+  .socialblue--sky .layout--with-complementary.sidebar-left > .region--content {
+    padding-left: 1rem;
     padding-right: 0;
   }
-  .socialblue--sky .layout--with-complementary .region--content {
-    padding-left: 0;
-    padding-right: 20px;
-  }
-  .socialblue--sky .region--complementary {
+  .socialblue--sky.path-user .layout--with-complementary .region--secondary-navigation, .socialblue--sky.path-group .layout--with-complementary .region--secondary-navigation {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
     padding-right: 0;
-    padding-left: 20px;
-  }
-}
-
-@media (max-width: 599px) {
-  .socialblue--sky .region--secondary-navigation {
-    margin-top: 0;
   }
 }
 
 @media (max-width: 899px) {
-  body.socialblue--sky .region--complementary_wrapper {
-    border-radius: 0 !important;
+  .socialblue--sky.path-user .region--secondary-navigation, .socialblue--sky.path-group .region--secondary-navigation {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+    max-width: 100%;
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+  }
+  .socialblue--sky.path-user .region--complementary, .socialblue--sky.path-group .region--complementary {
+    padding-left: 0;
+    padding-right: 0;
+    -webkit-box-ordinal-group: 1;
+        -ms-flex-order: 0;
+            order: 0;
+  }
+  .socialblue--sky.path-user .region--content, .socialblue--sky.path-group .region--content {
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
   }
 }

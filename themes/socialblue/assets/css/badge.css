@@ -4,7 +4,7 @@
 }
 
 .badge__icon {
-  fill: #4a4a4a;
+  fill: #4d4d4d;
 }
 
 .badge--pill {
@@ -13,7 +13,7 @@
 
 .badge-default {
   background-color: #e6e6e6;
-  color: #4a4a4a;
+  color: #4d4d4d;
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
@@ -46,7 +46,7 @@
 
 .badge-accent {
   background-color: #ffc142;
-  color: #4a4a4a;
+  color: #4d4d4d;
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
@@ -100,57 +100,9 @@
 }
 
 a .badge-default {
-  color: #4a4a4a;
+  color: #4d4d4d;
 }
 
 a .badge-default:hover {
-  color: #4a4a4a;
-}
-
-.socialblue--sky .teaser__body .badge {
-  border-radius: 2px;
-  white-space: inherit;
-  text-align: left;
-}
-
-.socialblue--sky .teaser__image .badge {
-  font-size: .75rem;
-}
-
-.socialblue--sky .teaser__badge {
-  color: #4a4a4a;
-  background: transparent;
-}
-
-.socialblue--sky .teaser__badge:hover, .socialblue--sky .teaser__badge:active, .socialblue--sky .teaser__badge:focus {
-  background: transparent;
-}
-
-.socialblue--sky .badge-accent {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-.socialblue--sky .badge__icon path {
-  stroke: #4a4a4a;
-  fill: #4a4a4a;
-}
-
-.socialblue--sky .badge__icon.badge__user-orange {
-  height: 11px;
-}
-
-.socialblue--sky .badge--tag {
-  margin-right: 1.875rem;
-  margin-bottom: 1rem;
-}
-
-.socialblue--sky .badge--tag__title {
-  font-size: .875rem;
-}
-
-@media (min-width: 1200px) {
-  .socialblue--sky .teaser__body .badge {
-    margin-right: 2px;
-  }
+  color: #4d4d4d;
 }

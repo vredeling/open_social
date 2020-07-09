@@ -307,6 +307,8 @@ function socialbase_form_alter(&$form, FormStateInterface $form_state, $form_id)
       'data_policy_data_policy_agreement',
       'data_policy_data_policy_revision_edit',
       'event_an_enroll_form',
+      'block_content_custom_content_list_form',
+      'block_content_custom_content_list_edit_form',
     ]
   );
 
@@ -478,4 +480,12 @@ function socialbase_form_search_content_form_alter(&$form) {
     '#type' => "inline_template",
     '#template' => '<svg class="icon--search"><use xlink:href="#icon-search"></use></svg>',
   ];
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function socialbase_form_node_layout_builder_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Make the layout builder specific styling available.
+  $form['#attached']['library'][] = 'socialbase/form--toolbar';
 }

@@ -1,4 +1,4 @@
-{% extends "node--teaser--sky.html.twig" %}
+{% extends "node--event--teaser.html.twig" %}
 
 {% block card_body %}
 
@@ -14,23 +14,10 @@
     {% endembed %}
   {% endif %}
 
-  {% if event_type %}
-    {% embed "node--teaser__field.html.twig" %}
-      {%- block field_icon -%} label {%- endblock -%}
-      {%- block field_value -%} {{ event_type }} {%- endblock -%}
-    {% endembed %}
-  {% endif %}
-
   {% if content.group_name %}
     {% embed "node--teaser__field.html.twig" %}
       {%- block field_icon -%} group {%- endblock -%}
       {%- block field_value -%} {{ content.group_name }} {%- endblock -%}
-    {% endembed %}
-  {% endif %}
-
-  {% if content.body %}
-    {% embed "node--teaser__body.html.twig" %}
-      {% block field_body %} {{ content.body }} {% endblock %}
     {% endembed %}
   {% endif %}
 

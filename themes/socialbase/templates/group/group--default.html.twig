@@ -41,13 +41,21 @@
 #}
 {% if content.field_group_description|render %}
   <div{{ attributes.addClass('card') }}>
+
+
     <div{{ content_attributes.addClass('card__body body-text') }}>
-      {% if style == 'sky' %}
-        <div class="field--label">{% trans %} Introduction {% endtrans %}</div>
-        <div class="field--text">{{ content.field_group_description }}</div>
-      {% else %}
-        {{ content.field_group_description }}
+      {% if not label_hidden %}
+        {%
+          set title_classes = [
+          'field--label',
+          label_display == 'visually_hidden' ? 'sr-only',
+        ]
+        %}
+
+        <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
       {% endif %}
+
+      {{ content.field_group_description }}
     </div>
   </div>
 {% endif %}

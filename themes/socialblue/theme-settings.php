@@ -136,7 +136,7 @@ function socialblue_form_system_theme_settings_alter(&$form, FormStateInterface 
         '#title' => t('Font'),
         '#options' => $fonts,
         '#default_value' => $config->get('font_primary'),
-        '#description' => t("The font family to use."),
+        '#description' => t('The font family to use.'),
       ];
 
       $form['os_style_settings'] = [
@@ -146,6 +146,7 @@ function socialblue_form_system_theme_settings_alter(&$form, FormStateInterface 
         '#weight' => 40,
         '#collapsible' => TRUE,
         '#collapsed' => TRUE,
+        '#access' => \Drupal::currentUser()->hasPermission('administer improved theme settings'),
       ];
 
       $form['os_style_settings']['style'] = [

@@ -1,126 +1,85 @@
-{{ attach_library('socialbase/teaser') }}
-{{ attach_library('socialblue/teaser--sky') }}
-{{ attach_library('social_landing_page/featured') }}
+{% extends "node--featured.html.twig" %}
 
-{% set classes = [
-  'card teaser teaser--tile',
-  no_image ? 'no-image',
-  profile_name ? 'teaser--profile'
-] %}
+{% block card_title %}
 
-<div{{ attributes.addClass(classes) }}>
-  {% block card_image %}
-    <div class="teaser__image">
-      {% block card_hero_image %}
-        <div class="img_wrapper">
-          {% if no_image %}
-            <hr class="no-feature-image">
-          {% else %}
-            {{ content.field_event_image }}
-            {{ content.field_topic_image }}
-            {{ content.field_page_image }}
-            {{ content.field_book_image }}
-            {{ content.field_image }}
-          {% endif %}
-        </div>
-      {% endblock %}
+  <div class="teaser__header">
 
-      {% if no_image %}
-        {% block card_teaser_type %}
-          <a href="{{ url }}">
-            <div class="teaser__teaser-type">
-              <svg class="teaser__teaser-type-icon">
-                <use xlink:href="#icon-{{- node.bundle|clean_class -}}"></use>
-              </svg>
-            </div>
-          </a>
-        {% endblock %}
-      {% endif %}
+    {{ title_prefix.teaser_tag }}
 
-    </div>
-  {% endblock %}
-
-  <div class='teaser__body'>
-    <div class="teaser__content">
-
-      {% if node.type.entity.label %}
-        <div class="teaser__content-line teaser__content-header">
-          <div class="teaser__published">
-            <div class="teaser__published-type">
-              {{ node.type.entity.label }}
-            </div>
-          </div>
-        </div>
-      {% endif %}
-
-      {% block card_title %}
-        {{ title_prefix }}
-        {% if not page %}
-          <h4{{ title_attributes }} class="teaser__title">
-            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-          </h4>
-        {% endif %}
-        {{ title_suffix }}
-      {% endblock %}
-
-      {% block card_body %}
-        <small class="text-muted">
-          {% embed "node--teaser__field.html.twig" %}
-            {%- block field_icon -%} account_circle {%- endblock -%}
-            {%- block field_value %}
-              <div class="teaser__published">
-                <div class="teaser__published-author"> {{ author_name }} &bullet;</div>
-                <div class="teaser__published-date"> {{ date }}</div>
-              </div>
-            {%- endblock -%}
-          {% endembed %}
-        </small>
-      {% endblock %}
-    </div>
-  </div>
-
-  <div class="card__actionbar">
-    {% if comment_count or likes_count or content.enrolled %}
-      <div class="card__actionbar-side">
-        {% if comment_count > 0 %}
-          <a href="{{ url }}#section-comments" class="badge teaser__badge"
-             title="{% trans %}Total amount of comments{% endtrans %}">
-                <span class="badge__container">
-                  <svg class="badge__icon">
-                    <use xlink:href="#icon-comment"></use>
-                  </svg>
-                  <span class="badge__label">{{ comment_count }}</span>
-                </span>
-          </a>
-        {% endif %}
-
-        {% if likes_count is not empty %}
-          <div class="badge teaser__badge" title="{% trans %}Total amount of likes{% endtrans %}">
-              <span class="badge__container">
-                <svg class="badge__icon">
-                  <use xlink:href="#icon-liked"></use>
-                </svg>
-                <span class="badge__label">
-                  {{ likes_count }}
-                </span>
-              </span>
-          </div>
-        {% endif %}
-
-        {% if content.enrolled %}
-          <span class="badge badge-secondary teaser__badge">
-                {%- trans -%} You have enrolled {%- endtrans -%}
-              </span>
-        {% endif %}
+    {% if visibility_icon and visibility_label %}
+      <div class="badge teaser__badge no-padding"
+           title="{% trans %}The visibility of this content is set to {{ visibility_label }}{% endtrans %} ">
+        <span class="badge__container">
+          <svg class="badge__icon">
+            <use xlink:href="#icon-{{ visibility_icon }}"></use>
+          </svg>
+          <span class="badge__label text-gray">{{ visibility_label|capitalize }}</span>
+        </span>
       </div>
     {% endif %}
+  </div>
 
-    {% block card_link %}
+  {{ title_prefix|without('teaser_tag') }}
+  <h4{{ title_attributes }} class="teaser__title">
+    <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+  </h4>
+  {{ title_suffix }}
+
+{% endblock %}
+
+{% block card_body %}
+
+  <small class="text-muted teaser__not-icon">
+    {% if display_submitted %}
+      {% embed "node--teaser__field.html.twig" %}
+        {%- block field_icon -%} account_circle {%- endblock -%}
+        {%- block field_value %}
+          <div class="teaser__published">
+            <div class="teaser__published-date"> {{ date }} &bullet;</div>
+            <div class="teaser__published-author"> {{ author_name }} </div>
+          </div>
+        {%- endblock -%}
+      {% endembed %}
+    {% endif %}
+  </small>
+
+{% endblock %}
+
+{% block card_actionbar %}
+
+  {% if comment_count %}
+    <a href="{{ url }}#section-comments" class="badge teaser__badge"
+       title="{% trans %}Total amount of comments{% endtrans %}">
+      <span class="badge__container">
+        <svg class="badge__icon">
+          <use xlink:href="#icon-comment"></use>
+        </svg>
+        <span class="badge__label">{{ comment_count }}</span>
+      </span>
+    </a>
+  {% endif %}
+
+  {% if likes_count is not empty %}
+    <div class="badge teaser__badge" title="{% trans %}Total amount of likes{% endtrans %}">
+      <span class="badge__container">
+        <svg class="badge__icon">
+          <use xlink:href="#icon-like"></use>
+        </svg>
+        <span class="badge__label">
+          {{ likes_count }}
+        </span>
+      </span>
+    </div>
+  {% endif %}
+
+  {% block card_link %}
+    {% if not hide_card_link %}
       <div class="card__link">
-        <a href="{{ url }}" rel="bookmark" class="btn btn-default btn-block">{{ 'Read more'|t }}
-          <span class="visually-hidden">{{ 'about'|t }}{{ label }}</span>
+        <a href="{{ url }}" rel="bookmark">{{ 'Read more'|t }}
+          <span class="visually-hidden">{% trans %}about {{ label }}{% endtrans %} </span>
         </a>
       </div>
-    {% endblock %}
-  </div>
-</div>
+    {% endif %}
+  {% endblock %}
+
+{% endblock %}

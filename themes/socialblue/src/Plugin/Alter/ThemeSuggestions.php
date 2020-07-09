@@ -19,6 +19,7 @@ class ThemeSuggestions extends BaseThemeSuggestions {
   public function alter(&$suggestions, &$context = NULL, &$hook = NULL) {
     parent::alter($suggestions, $context, $hook);
 
+    // Add new template suggestions to be able to override for different style.
     $style = theme_get_setting('style');
 
     if (!empty($style)) {

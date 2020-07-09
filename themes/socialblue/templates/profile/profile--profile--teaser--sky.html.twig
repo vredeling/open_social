@@ -1,76 +1,12 @@
-{{ attach_library('socialbase/teaser') }}
-{{ attach_library('socialblue/teaser--sky') }}
-{{ attach_library('ctbto_core/ctbto_core.teaser') }}
+{% extends "profile--profile--teaser.html.twig" %}
 
-<div class="card teaser teaser__profile">
-  <a href="{{ profile_stream_url }}" class="teaser__image">
-    {% if content.field_profile_image %}
-      {{ content.field_profile_image }}
-    {% endif %}
-  </a>
-  <div class="teaser__body">
-    <div class="teaser__content">
-      <h4 class="teaser__title">
-        <a href="{{ profile_stream_url }}">
-          {{ profile_name }} {{ profile_name_extra }}
-        </a>
-      </h4>
-      {% if content.field_nationality|render %}
-        <div class="teaser__content-line">
-          <span class="teaser__content-text">
-            {{ content.field_nationality }}
-          </span>
-        </div>
-      {% endif %}
-
-      <div class="teaser__content-group">
-
-        {% if content.field_university_or_institution_|render %}
-          <div class="teaser__content-line">
-            <svg class="teaser__content-type-icon">
-              <use xlink:href="#icon-university"></use>
-            </svg>
-            <span class="teaser__content-text">
-              {{ content.field_university_or_institution_.0 }}
-          </span>
-          </div>
-        {% endif %}
-
-        {% if content.field_main_course_of_study|render %}
-          <div class="teaser__content-line">
-            <svg class="teaser__content-type-icon">
-              <use xlink:href="#icon-study"></use>
-            </svg>
-            <span class="teaser__content-text">
-              {{ content.field_main_course_of_study.0 }}
-          </span>
-          </div>
-        {% endif %}
-
-      </div>
-
-      {% if content.field_profile_profile_tag['#items'] or badges %}
-        <div style="margin-left: 30px; margin-top: 5px;">
-          {% for badge in badges %}
-            {% set badge_classes = badge.classes|merge(['badge']) %}
-            <div{{ attributes.addClass(badge_classes) }}>{{ badge.label }}</div>
-          {% endfor %}
-          {% for item in content.field_profile_profile_tag['#items'] %}
-            <div class="badge badge-default">{{ item.entity.label }}</div>
-          {% endfor %}
-        </div>
-      {% endif %}
-
-    </div>
-
-    <div class="card__actionbar">
-      <div class="card__link">
-        {% if profile_contact_url %}
-          <a href="{{ profile_contact_url }}" class="btn btn-default waves-effect waves-btn">
-            {% trans %}Send Message{% endtrans %}
-          </a>
-        {% endif %}
-      </div>
-    </div>
+{% block card_title %}
+  <div class="teaser__tag">
+    {% trans %}Member{% endtrans %}
   </div>
-</div>
+  <h4 class="teaser__title">
+    <a href="{{ profile_home }}">
+      {{ profile_name }} {{ profile_name_extra }}
+    </a>
+  </h4>
+{% endblock %}

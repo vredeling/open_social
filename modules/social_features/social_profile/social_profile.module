@@ -11,6 +11,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\file\Entity\File;
@@ -19,8 +20,6 @@ use Drupal\profile\Entity\Profile;
 use Drupal\profile\Entity\ProfileType;
 use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
-use Drupal\block\Entity\Block;
-use Drupal\Core\Access\AccessResult;
 
 define('SOCIAL_PROFILE_SUGGESTIONS_USERNAME', 'username');
 define('SOCIAL_PROFILE_SUGGESTIONS_FULL_NAME', 'full_name');
@@ -354,15 +353,7 @@ function social_profile_preprocess_profile(array &$variables) {
     $variables['#cache']['contexts'][] = 'user';
   }
 
-  // Email field.
-  $global_show_email = \Drupal::config('social_profile.settings')->get('social_profile_show_email');
-  if (isset($profile->field_profile_show_email)) {
-    $profile_show_email = $profile->field_profile_show_email->value;
-  }
-  if ($global_show_email
-    || (!$global_show_email && !empty($profile_show_email))
-    || $current_user->hasPermission('view profile email')
-  ) {
+  if (social_profile_check_email_field_access($profile, $current_user)) {
     // Derived from MailToFormatter.php.
     $variables['user_mail'] = Link::fromTextAndUrl($user->getEmail(), Url::fromUri('mailto:' . $user->getEmail()));
   }
@@ -387,19 +378,49 @@ function social_profile_preprocess_profile(array &$variables) {
     $variables['profile_image_url'] = ImageStyle::load('social_medium')
       ->buildUrl($profile->field_profile_image->entity->getFileUri());
   }
+  // Profile information URL.
+  $variables['profile_info_url'] = Url::fromRoute('view.user_information.user_information', ['user' => $profile->getOwnerId()]);
 
   // Prepare variables for statistic block.
-  $storage = \Drupal::entityTypeManager()->getStorage('node');
-  $variables['profile_topics'] = count($storage->loadByProperties([
-    'uid' => $user->id(),
-    'type' => 'topic',
-  ]));
-  $variables['profile_events'] = count($storage->loadByProperties([
-    'uid' => $user->id(),
-    'type' => 'event',
-  ]));
-  $variables['profile_groups'] = count(\Drupal::service('social_group.helper_service')->getAllGroupsForUser($user->id()));
+  if ($variables['elements']['#view_mode'] === 'statistic') {
+    /** @var \Drupal\social_profile\UserStatistics $user_statistics */
+    $user_statistics = \Drupal::service('social_profile.user_statistics');
+    $variables['profile_topics'] = $user_statistics->nodeCount($user->id(), 'topic');
+    $variables['profile_events'] = $user_statistics->nodeCount($user->id(), 'event');
+    $variables['profile_groups'] = count(\Drupal::service('social_group.helper_service')->getAllGroupsForUser($user->id()));
+  }
+}
 
+/**
+ * Helps determine if current user has access to view the email field.
+ *
+ * @param \Drupal\profile\Entity\Profile $profile
+ *   The profile the current user is viewing.
+ * @param \Drupal\Core\Session\AccountProxyInterface $current_user
+ *   The current user.
+ *
+ * @return bool
+ *   Return TRUE if current user is allowed to see the email, FALSE otherwise.
+ */
+function social_profile_check_email_field_access(Profile $profile, AccountProxyInterface $current_user) {
+  // If the current user has this permission, return true straight away.
+  if ($current_user->hasPermission('social profile privacy view hidden fields') || $current_user->hasPermission('view profile email')) {
+    return TRUE;
+  }
+
+  // Prepare some variables for checking on the email field.
+  $global_show_email = \Drupal::config('social_profile.settings')->get('social_profile_show_email');
+  if (isset($profile->field_profile_show_email)) {
+    $profile_show_email = $profile->field_profile_show_email->value ?? NULL;
+  }
+
+  // If the current user doesn't have the above permission, perform additional
+  // checks to see if the current user is still able to view this email field.
+  if ($global_show_email || (!$global_show_email && !empty($profile_show_email))) {
+    return TRUE;
+  }
+
+  return FALSE;
 }
 
 /**
@@ -733,18 +754,4 @@ function social_profile_social_user_account_header_items_alter(array &$menu_item
     ->getViewBuilder('profile')
     ->view($profile, 'small');;
 
-}
-
-/**
- * Implements hook_block_access().
- */
-function social_profile_block_access(Block $block, $operation, AccountInterface $account) {
-  // Show statistic block only when new style is enabled.
-  if ($operation == 'view' && $block->getPluginId() === 'profile_statistic_block') {
-    if (theme_get_setting('style') !== 'sky') {
-      return AccessResult::forbidden();
-    }
-  }
-  // No opinion for other situations.
-  return AccessResult::neutral();
 }
