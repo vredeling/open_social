@@ -42,7 +42,7 @@ function social_scroll_form_view_edit_form_alter(&$form, FormStateInterface $for
       $form_object->messenger()
         ->addWarning(t('You cannot change the pager settings because it is overridden by the "@module_name" module. You can change the settings @here', [
           '@module_name' => $module_name,
-          '@here' => Link::createFromRoute('here', 'social_scroll.settings')
+          '@here' => Link::createFromRoute(t('here'), 'social_scroll.settings')
             ->toString(),
         ]));
     }

@@ -22,9 +22,9 @@ class SocialScrollOverride implements ConfigFactoryOverrideInterface {
   protected $configFactory;
 
   /**
-   * The SocialScrollManager manager.
+   * The social scroll manager.
    *
-   * @var \Drupal\social_scroll\SocialScrollManager
+   * @var \Drupal\social_scroll\SocialScrollManagerInterface
    */
   protected $socialScrollManager;
 
@@ -33,10 +33,10 @@ class SocialScrollOverride implements ConfigFactoryOverrideInterface {
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The config factory.
-   * @param \Drupal\social_scroll\SocialScrollManager $social_scroll_manager
+   * @param \Drupal\social_scroll\SocialScrollManagerInterface $social_scroll_manager
    *   The SocialScrollManager manager.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, SocialScrollManager $social_scroll_manager) {
+  public function __construct(ConfigFactoryInterface $config_factory, SocialScrollManagerInterface $social_scroll_manager) {
     $this->configFactory = $config_factory;
     $this->socialScrollManager = $social_scroll_manager;
   }
@@ -46,9 +46,9 @@ class SocialScrollOverride implements ConfigFactoryOverrideInterface {
    */
   public function loadOverrides($names) {
     $overrides = [];
-    $enabled_views = $this->socialScrollManager->getEnabledViewIds();
+    $enabled_views = array_keys($this->socialScrollManager->getEnabledViewIds());
 
-    foreach ($enabled_views as $key => $status) {
+    foreach ($enabled_views as $key) {
       $config_name = $this->socialScrollManager->getConfigName($key);
 
       if (in_array($config_name, $names)) {

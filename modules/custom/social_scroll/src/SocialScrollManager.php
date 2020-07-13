@@ -38,17 +38,8 @@ class SocialScrollManager implements SocialScrollManagerInterface {
    */
   public function getEnabledViewIds() {
     $all_views = $this->getAllAvailableViewIds();
-    $enabled_views = [];
 
-    if (is_array($all_views)) {
-      foreach ($all_views as $key => $status) {
-        if ($status) {
-          $enabled_views[$key] = $status;
-        }
-      }
-    }
-
-    return $enabled_views;
+    return is_array($all_views) ? array_filter($all_views) : [];
   }
 
   /**

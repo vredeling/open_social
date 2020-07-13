@@ -7,7 +7,7 @@ use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\social_scroll\SocialScrollManager;
+use Drupal\social_scroll\SocialScrollManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -27,9 +27,9 @@ class SocialScrollSettingsForm extends ConfigFormBase implements ContainerInject
   protected $moduleHandler;
 
   /**
-   * The SocialScrollManager manager.
+   * The social scroll manager.
    *
-   * @var \Drupal\social_scroll\SocialScrollManager
+   * @var \Drupal\social_scroll\SocialScrollManagerInterface
    */
   protected $socialScrollManager;
 
@@ -40,10 +40,10 @@ class SocialScrollSettingsForm extends ConfigFormBase implements ContainerInject
    *   The config factory service.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
    *   The module handler service.
-   * @param \Drupal\social_scroll\SocialScrollManager $social_scroll_manager
+   * @param \Drupal\social_scroll\SocialScrollManagerInterface $social_scroll_manager
    *   The SocialScrollManager manager.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $moduleHandler, SocialScrollManager $social_scroll_manager) {
+  public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $moduleHandler, SocialScrollManagerInterface $social_scroll_manager) {
     parent::__construct($config_factory);
     $this->moduleHandler = $moduleHandler;
     $this->socialScrollManager = $social_scroll_manager;
@@ -53,7 +53,6 @@ class SocialScrollSettingsForm extends ConfigFormBase implements ContainerInject
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    /* @noinspection  PhpParamsInspection */
     return new static(
       $container->get('config.factory'),
       $container->get('module_handler'),
@@ -146,10 +145,8 @@ class SocialScrollSettingsForm extends ConfigFormBase implements ContainerInject
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $config = $this->config(self::CONFIG_NAME);
-    $views_list = $form_state->getValues()['list'];
-
-    $config->set('views_list', $views_list)
+    $this->config(self::CONFIG_NAME)
+      ->set('views_list', $form_state->getValue('list'))
       ->set('button_text', $form_state->getValue('button_text'))
       ->set('automatically_load_content', $form_state->getValue('automatically_load_content'))
       ->save();
