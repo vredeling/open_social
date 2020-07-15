@@ -115,7 +115,7 @@
         "drupal-composer/drupal-scaffold": "^2.5.0",
         "drupal/core": "~8.8.8",
         "drupal/address": "1.7",
-        "drupal/admin_toolbar": "1.27",
+        "drupal/admin_toolbar": "^2.0",
         "drupal/ajax_comments": "^1.0",
         "drupal/better_exposed_filters": "3.0-alpha6",
         "drupal/block_field": "1.0-alpha8",
