@@ -101,8 +101,18 @@
                 "Improve performance for embeds": "https://www.drupal.org/files/issues/2018-03-16/url_embed-caching-layer-2867668-17.patch",
                 "Translate dialog title": "https://www.drupal.org/files/issues/2018-03-16/url_embed_translate_dialog_title-2953591-2.patch"
             },
+            "drupal/field_group": {
+                "Undefined property: stdClass::$region in field_group_form_process().": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
+            },
             "drupal/views_bulk_operations": {
                 "Make sure select all gets fired for socialbase theme": "https://www.drupal.org/files/issues/2019-09-19/3042494-trigger-vbo-action-on-jquery-checkbox-change-5.patch"
+            },
+            "drupal/votingapi" : {
+                "votingapi_views_data_alter uses incorrect empty check for missing entity error handling": "https://www.drupal.org/files/issues/2020-01-31/votingapi-3110353-2.patch",
+                "#3048085 - fix time() callback filling up the logs": "https://www.drupal.org/files/issues/2019-05-02/votingapi-timecallback-3048085-1-4.patch"
+            },
+            "drupal/views_infinite_scroll" : {
+                "Headers in table format repeat on load more instead of adding rows": "https://www.drupal.org/files/issues/2019-08-15/table_tbody_append-2899705-26.patch"
             }
         }
     },
@@ -141,9 +151,11 @@
         "drupal/entity_reference_revisions": "1.6",
         "drupal/exif_orientation": "^1.0",
         "drupal/features": "3.8",
-        "drupal/field_group": "3.0",
+        "drupal/field_group": "3.1",
         "drupal/file_mdm": "^2.1",
         "drupal/flag": "4.0-alpha3",
+        "drupal/gin": "3.0-alpha20",
+        "drupal/gin_toolbar": "^1.0@beta",
         "drupal/group": "1.0-rc5",
         "drupal/image_effects": "^3.0",
         "drupal/image_widget_crop": "2.2",
