@@ -116,20 +116,22 @@ class SocialGroupViewsBulkOperationsBulkForm extends ViewsBulkOperationsBulkForm
       $form['header'][$this->options['id']]['select_all']['#attributes']['class'][] = 'checkbox';
     }
 
-    /** @var \Drupal\Core\StringTranslation\TranslatableMarkup $title */
-    $title = $wrapper['multipage']['#title'];
-    $arguments = $title->getArguments();
-    $count = empty($arguments['%count']) ? 0 : $arguments['%count'];
+    if (!empty($wrapper['multipage'])) {
+      /** @var \Drupal\Core\StringTranslation\TranslatableMarkup $title */
+      $title = $wrapper['multipage']['#title'];
+      $arguments = $title->getArguments();
+      $count = empty($arguments['%count']) ? 0 : $arguments['%count'];
 
-    $title = $this->formatPlural($count, '<b><em class="placeholder">@count</em> Member</b> is selected', '<b><em class="placeholder">@count</em> Members</b> are selected');
-    $wrapper['multipage']['#title'] = [
-      '#type' => 'html_tag',
-      '#tag' => 'div',
-      '#value' => $title,
-    ];
+      $title = $this->formatPlural($count, '<b><em class="placeholder">@count</em> Member</b> is selected', '<b><em class="placeholder">@count</em> Members</b> are selected');
+      $wrapper['multipage']['#title'] = [
+        '#type' => 'html_tag',
+        '#tag' => 'div',
+        '#value' => $title,
+      ];
 
-    // Add selector so the JS of VBO applies correctly.
-    $wrapper['multipage']['#attributes']['class'][] = 'vbo-multipage-selector';
+      // Add selector so the JS of VBO applies correctly.
+      $wrapper['multipage']['#attributes']['class'][] = 'vbo-multipage-selector';
+    }
 
     // Get tempstore data so we know what messages to show based on the data.
     $tempstoreData = $this->getTempstoreData($this->view->id(), $this->view->current_display);
