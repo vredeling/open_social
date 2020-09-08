@@ -135,6 +135,7 @@
         "drupal/flag": "^4.0-beta2",
         "drupal/gin": "^3.0@alpha",
         "drupal/gin_toolbar": "^1.0@beta",
+        "drupal/graphql": "^4.0",
         "drupal/group": "1.0",
         "drupal/image_effects": "^3.0",
         "drupal/image_widget_crop": "^2.3",
