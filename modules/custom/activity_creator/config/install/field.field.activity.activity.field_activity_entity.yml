@@ -31,6 +31,7 @@ settings:
     handler: 'default:node'
     handler_settings:
       target_bundles:
+        book: book
         event: event
         topic: topic
       sort:
