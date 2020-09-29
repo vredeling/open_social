@@ -73,9 +73,6 @@
                 "Rely on toUrl defaults for Entity url link": "https://www.drupal.org/files/issues/2019-12-04/group-3098675-2.patch",
                 "Group Invite": "https://www.drupal.org/files/issues/2020-03-26/ginvite_module_port-2801603-112.patch"
             },
-            "drupal/image_widget_crop": {
-                "Remove theme function override for verticalTabs": "https://www.drupal.org/files/issues/2019-02-13/3032584-verticaltabs-theme-override-removal-2.patch"
-            },
             "drupal/lazy": {
                 "Make sure we grab active config for lazy settings": "https://www.drupal.org/files/issues/2019-05-23/3056630-2.patch",
                 "Make sure lazy doesnt do anything on cron": "https://www.drupal.org/files/issues/2019-07-30/3071331-lazy-cron-empty-path-2.patch"
@@ -158,7 +155,7 @@
         "drupal/gin_toolbar": "^1.0@beta",
         "drupal/group": "1.0",
         "drupal/image_effects": "^3.0",
-        "drupal/image_widget_crop": "2.2",
+        "drupal/image_widget_crop": "^2.3",
         "drupal/lazy": "2.0",
         "drupal/like_and_dislike": "^1.0",
         "drupal/link_css": "1.x-dev",
