@@ -5,9 +5,7 @@
  * Installation code for the activity_creator module.
  */
 
-use Drupal\activity_creator\ActivityInterface;
 use Drupal\Core\Database\Database;
-use Drupal\Core\Site\Settings;
 
 /**
  * Implements hook_schema().
