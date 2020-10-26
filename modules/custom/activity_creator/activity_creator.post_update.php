@@ -109,7 +109,7 @@ function activity_creator_post_update_8802_remove_orphaned_activities(&$sandbox)
     // If 'count' is empty, we have nothing to process.
     if (empty($sandbox['count'])) {
       $sandbox['#finished'] = 1;
-      drush_print("No entities to be processed.");
+      $this->output()->writeln("No entities to be processed.");
       return;
     }
 
@@ -144,7 +144,7 @@ function activity_creator_post_update_8802_remove_orphaned_activities(&$sandbox)
 
   // While processing our batch requests, we can send a helpful message
   // to the command line, so developers can track the batch progress.
-  drush_print('Progress: ' . (round($progress_fraction * 100)) . '% (' . $sandbox['progress'] . ' of ' . $sandbox['count'] . ' activities processed)');
+  $this->output()->writeln('Progress: ' . (round($progress_fraction * 100)) . '% (' . $sandbox['progress'] . ' of ' . $sandbox['count'] . ' activities processed)');
 
   // Drupal’s Batch API will stop executing our update hook as soon as
   // $sandbox['#finished'] == 1 (viz., it evaluates to TRUE).
@@ -186,7 +186,7 @@ function activity_creator_post_update_8803_remove_activities_with_no_related_ent
     // If 'count' is empty, we have nothing to process.
     if (empty($sandbox['count'])) {
       $sandbox['#finished'] = 1;
-      drush_print("No entities to be processed.");
+      $this->output()->writeln("No entities to be processed.");
       return;
     }
 
@@ -223,7 +223,7 @@ function activity_creator_post_update_8803_remove_activities_with_no_related_ent
   $progress_fraction = $sandbox['progress'] / $sandbox['count'];
 
   // Send a helpful message to the command line.
-  drush_print('Progress: ' . (round($progress_fraction * 100)) . '% (' . $sandbox['progress'] . ' of ' . $sandbox['count'] . ' activities processed)');
+  $this->output()->writeln('Progress: ' . (round($progress_fraction * 100)) . '% (' . $sandbox['progress'] . ' of ' . $sandbox['count'] . ' activities processed)');
 
   // Tell the Batch API about status of this process.
   $sandbox['#finished'] = empty($sandbox['activities_id']) ? 1 : ($sandbox['count'] - count($sandbox['activities_id'])) / $sandbox['count'];
