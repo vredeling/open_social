@@ -80,6 +80,9 @@
             "drupal/paragraphs": {
                 "Integrity constraint violation: 1048 Column 'langcode' cannot be null": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch"
             },
+            "drupal/private_message": {
+                "Issue when saving members.": "https://www.drupal.org/files/issues/2019-11-23/issue-member-save-3096352-2.patch"
+            },
             "drupal/r4032login": {
                 "r4032login should perform access check for /user/login as anonymous user": "https://www.drupal.org/files/issues/2018-11-01/3010747-3-perform-access-check-as-an-user.patch"
             },
