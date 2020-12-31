@@ -229,6 +229,16 @@ function social_group_preprocess_group(array &$variables) {
   $variables['group_type_id'] = $group_type_id;
   $variables['group_type'] = $group->getGroupType()->label();
 
+  // From 10.0.0 onwards, we want to show group types differently.
+  // It will be the value chosen while adding the group instead of saying
+  // 'Flexible group'.
+  if ($group_type_id == 'flexible_group'
+    && $group->hasField('field_group_type')
+    && !empty($term = $group->get('field_group_type')->entity)
+  ) {
+    $variables['group_type'] = $term->getName();
+  }
+
   $group_settings_help = [
     '#theme' => 'group_settings_help',
     '#group_type' => $group->getGroupType()->label(),
