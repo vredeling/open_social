@@ -100,9 +100,6 @@
             "drupal/field_group": {
                 "Undefined property: stdClass::$region in field_group_form_process().": "https://www.drupal.org/files/issues/2020-06-15/3059614-37.patch"
             },
-            "drupal/views_bulk_operations": {
-                "Make sure select all gets fired for socialbase theme": "https://www.drupal.org/files/issues/2019-09-19/3042494-trigger-vbo-action-on-jquery-checkbox-change-5.patch"
-            },
             "drupal/views_infinite_scroll": {
                 "Headers in table format repeat on load more instead of adding rows": "https://www.drupal.org/files/issues/2019-08-15/table_tbody_append-2899705-26.patch"
             }
@@ -179,7 +176,7 @@
         "drupal/token": "^1.5",
         "drupal/update_helper": "^2.0",
         "drupal/url_embed": "1.0-beta1",
-        "drupal/views_bulk_operations": "^3.9",
+        "drupal/views_bulk_operations": "^3.10",
         "drupal/views_infinite_scroll": "^1.6",
         "drupal/votingapi": "^3.0",
         "facebook/graph-sdk": "^5.6",
