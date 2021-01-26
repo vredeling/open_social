@@ -427,18 +427,3 @@ function social_topic_update_8908() {
     }
   }
 }
-
-/**
- * Find topic type term by name.
- */
-function _social_topic_get_term_id_by_name($term_name) {
-  $terms = \Drupal::entityTypeManager()
-    ->getStorage('taxonomy_term')
-    ->loadByProperties([
-      'name' => $term_name,
-      'vid' => 'topic_types',
-    ]);
-  $term = reset($terms);
-
-  return !empty($term) ? $term : FALSE;
-}
