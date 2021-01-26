@@ -65,9 +65,6 @@
                 "Rely on toUrl defaults for Entity url link": "https://www.drupal.org/files/issues/2019-12-04/group-3098675-2.patch",
                 "Group Invite": "https://www.drupal.org/files/issues/2020-03-26/ginvite_module_port-2801603-112.patch"
             },
-            "drupal/like_and_dislike": {
-                "Fix preview on node": "https://www.drupal.org/files/issues/2848080-2-preview-fails-on-node.patch"
-            },
             "drupal/paragraphs": {
                 "Integrity constraint violation: 1048 Column 'langcode' cannot be null": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch"
             },
