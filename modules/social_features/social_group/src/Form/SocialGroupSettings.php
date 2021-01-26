@@ -10,7 +10,7 @@ use Drupal\Core\Url;
 use Drupal\crop\Entity\CropType;
 
 /**
- * Configures group settings.
+ * Settings form which enables site managers to configure different options.
  *
  * @package Drupal\social_event_managers\Form
  */
@@ -95,8 +95,7 @@ class SocialGroupSettings extends ConfigFormBase {
       $config->set($key, !empty($value));
     }
 
-    $config->set('default_hero', $form_state->getValue('default_hero'))->set('social_group_type_required', $form_state->getValue('social_group_type_required'))
-      ->save();
+    $config->set('default_hero', $form_state->getValue('default_hero'))->save();
     $config->set('social_group_type_required', $form_state->getValue('social_group_type_required'))->save();
 
     Cache::invalidateTags(['group_view']);

@@ -116,7 +116,7 @@ function social_post_update_8801() {
 /**
  * Give access to creating posts of specific types.
  */
-function social_post_update_8803(&$sandbox) {
+function social_post_update_8802(&$sandbox) {
   if (!isset($sandbox['total'])) {
     $sandbox['total'] = \Drupal::entityQuery('user_role')
       ->condition('id', 'administrator', '<>')
@@ -184,6 +184,9 @@ function social_post_update_8804() {
   }
 }
 
+/**
+ * Update likes in post activity and comment view modes.
+ */
 function social_post_update_8901() {
   /** @var \Drupal\update_helper\Updater $updateHelper */
   $updateHelper = \Drupal::service('update_helper.updater');
