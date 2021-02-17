@@ -146,8 +146,6 @@
         "drupal/search_api": "^1.17",
         "drupal/shariff": "1.5",
         "drupal/socialblue": "^1.0",
-        "drupal/social_api": "^2.0",
-        "drupal/social_auth": "^2.0",
         "drupal/swiftmailer": "^2.0",
         "drupal/select2": "^1.11",
         "drupal/token": "1.5",
