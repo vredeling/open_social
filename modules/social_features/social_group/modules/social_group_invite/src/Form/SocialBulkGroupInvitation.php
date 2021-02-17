@@ -78,6 +78,20 @@ class SocialBulkGroupInvitation extends BulkGroupInvitation {
   protected $configFactory;
 
   /**
+   * The Membership Loader.
+   *
+   * @var \Drupal\group\GroupMembershipLoaderInterface
+   */
+  protected $groupMembershipLoader;
+
+  /**
+   * The Config factory.
+   *
+   * @var \Drupal\ginvite\GroupInvitationLoader
+   */
+  protected $groupInvitationLoader;
+
+  /**
    * The token service.
    *
    * @var \Drupal\Core\Utility\Token
@@ -132,6 +146,8 @@ class SocialBulkGroupInvitation extends BulkGroupInvitation {
     $this->pluginManager = $plugin_manager;
     $this->configFactory = $config_factory;
     $this->token = $token;
+    $this->groupInvitationLoader = $group_membership_loader;
+    $this->groupMembershipLoader = $invitation_loader;
   }
 
   /**
@@ -211,8 +227,12 @@ class SocialBulkGroupInvitation extends BulkGroupInvitation {
     $group_plugin_collection = $this->pluginManager->getInstalled($group->getGroupType());
     $group_invite_config = $group_plugin_collection->getConfiguration()['group_invitation'];
 
-    $invitation_subject = $group_invite_config['invitation_subject'];
-    $invitation_body = $group_invite_config['invitation_body'];
+    // Get invite settings.
+    $invite_settings = $this->configFactory->get('social_group.settings')->get('group_invite');
+
+    // Set preview subject and message.
+    $invitation_subject = $invite_settings['invite_subject'] ?? $group_invite_config['invitation_subject'];
+    $invitation_body = $invite_settings['invite_message'] ?? $group_invite_config['invitation_body'];
 
     // Cleanup message body and replace any links on preview page.
     $invitation_body = $this->token->replace($invitation_body, $params);
@@ -309,7 +329,7 @@ class SocialBulkGroupInvitation extends BulkGroupInvitation {
       }
       else {
         // Load the user by userId.
-        $account = user::load($user);
+        $account = User::load($user);
 
         if ($account instanceof UserInterface) {
           $membership = $this->groupMembershipLoader->load($this->group, $account);

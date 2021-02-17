@@ -31,17 +31,7 @@ class SocialDownloadCountConfigOverride implements ConfigFactoryOverrideInterfac
     $content_types = ['book', 'event', 'page', 'topic'];
     foreach ($content_types as $content_type) {
       $config_name = "core.entity_view_display.node.{$content_type}.default";
-      $overrides[$config_name] = [
-        'content' => [
-          'field_files' => [
-            'label' => t('Downloads'),
-            'settings' => [],
-            'third_party_settings' => [],
-            'type' => 'FieldDownloadCount',
-            'weight' => 3,
-          ]
-        ]
-      ];
+      $overrides[$config_name] = ['content' => ['field_files' => ['type' => 'FieldDownloadCount']]];
     }
 
     return $overrides;

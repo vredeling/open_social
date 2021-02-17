@@ -4,7 +4,6 @@
 namespace Drupal\social\Behat;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\TableNode;
@@ -13,12 +12,13 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use Drupal\DrupalExtension\Hook\Scope\EntityScope;
 use Drupal\group\Entity\Group;
 use Drupal\locale\SourceString;
+use Behat\Mink\Selector\Xpath\Escaper;
 use PHPUnit\Framework\Assert as Assert;
 
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext extends RawMinkContext implements Context, SnippetAcceptingContext
+class FeatureContext extends RawMinkContext implements Context
 {
 
     protected $minkContext;
@@ -145,8 +145,11 @@ class FeatureContext extends RawMinkContext implements Context, SnippetAccepting
 
       $iframe_source = $element->getAttribute('src');
 
-      if ($iframe_source !== $src) {
-        throw new \InvalidArgumentException(sprintf('The iframe does not have the src: "%s"', $src));
+      // the sources could contain certain metadata making it hard to test
+      // if it matches the given source. So we don't strict check rather
+      // check if part of the source matches.
+      if (strpos($iframe_source, $src) === FALSE) {
+        throw new \InvalidArgumentException(sprintf('The iframe source does not contain the src: "%s" it is however: "%s"', $src, $iframe_source));
       }
     }
 
@@ -385,7 +388,8 @@ class FeatureContext extends RawMinkContext implements Context, SnippetAccepting
 
       $element = $session->getPage();
 
-      $radiobutton = $id ? $element->findById($id) : $element->find('named', array('radio', $this->getSession()->getSelectorsHandler()->xpathLiteral($label)));
+      $escaper = new Escaper();
+      $radiobutton = $id ? $element->findById($id) : $element->find('named', array('radio', $escaper->escapeLiteral($label)));
       if ($radiobutton === NULL) {
         throw new \Exception(sprintf('The radio button with "%s" was not found on the page %s', $id ? $id : $label, $this->getSession()->getCurrentUrl()));
       }
@@ -439,6 +443,27 @@ class FeatureContext extends RawMinkContext implements Context, SnippetAccepting
     }
 
     /**
+     * Shows hidden inputs.
+     *
+     * @When /^(?:|I )show hidden inputs/
+     */
+    public function showHiddenInputs()
+    {
+      $session = $this->getSession();
+
+      $session->executeScript(
+        "var inputs = document.getElementsByClassName('input');
+            for(var i = 0; i < inputs.length; i++) {
+            inputs[i].style.opacity = 1;
+            inputs[i].style.left = 0;
+            inputs[i].style.position = 'relative';
+            inputs[i].style.display = 'block';
+            }
+            ");
+    }
+
+
+  /**
      * Opens specified page.
      *
      * @Given /^(?:|I )am on the profile of "(?P<username>[^"]+)"$/
@@ -603,7 +628,7 @@ class FeatureContext extends RawMinkContext implements Context, SnippetAccepting
         ->condition('label', $group_title);
 
       $group_ids = $query->execute();
-      $groups = entity_load_multiple('group', $group_ids);
+      $groups = \Drupal::entityTypeManager()->getStorage('group')->loadMultiple($group_ids);
 
       if (count($groups) > 1) {
         return NULL;
@@ -782,7 +807,8 @@ class FeatureContext extends RawMinkContext implements Context, SnippetAccepting
       }
 
       $query = \Drupal::entityQuery('group')
-        ->condition('label', $groupname);
+        ->condition('label', $groupname)
+        ->accessCheck(FALSE);
       $gid = $query->execute();
 
       if (!empty($gid) && count($gid) === 1) {
@@ -838,7 +864,7 @@ class FeatureContext extends RawMinkContext implements Context, SnippetAccepting
      *  1 = YES access
      */
     public function openEntityAndExpectAccess($entity_type, $entity_id, $expected_access) {
-      $entity = entity_load($entity_type, $entity_id);
+      $entity = \Drupal::entityTypeManager()->getStorage($entity_type)->load($entity_id);
       /** @var \Drupal\Core\Url $url */
       $url = $entity->toUrl();
       $page = $url->toString();
