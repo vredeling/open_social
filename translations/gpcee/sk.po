@@ -1486,8 +1486,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Open Social\n"
 "POT-Creation-Date: 2021-02-20 00:32+0000\n"
-"PO-Revision-Date: 2021-02-26 13:16+0000\n"
-"Last-Translator: Ivana Daubnerova <ivana.daubnerova@gmail.com>\n"
+"PO-Revision-Date: 2021-03-01 22:03+0000\n"
+"Last-Translator: Lucia Sumegova <lucia.sumegova@greenpeace.org>\n"
 "Language-Team: Slovak <https://translate.getopensocial.com/projects/gpcee/"
 "distribution/sk/>\n"
 "Language: sk\n"
@@ -2214,9 +2214,9 @@ msgid ""
 "gurl]\">[message:gtitle]</a> group</p><p>[message:additional_information]</p>"
 msgstr ""
 "<p><a href=\"[message:author:url:absolute]\">[message:author:display-name]</"
-"a> vytvorilPa [social_group:created_entity_link_html] v <a href=\"[message:"
-"gurl]\">[message:gtitle]</a> skupine</p><p>[message:additional_information]</"
-"p>"
+"a> vytvoril/a [social_group:created_entity_link_html] v <a href=\""
+"[message:gurl]\">[message:gtitle]</a> "
+"skupine</p><p>[message:additional_information]</p>"
 
 #: modules/social_features/social_follow_taxonomy/modules/social_follow_tag/config/install/message.template.create_node_following_tag.yml:0
 msgid ""
@@ -4003,7 +4003,7 @@ msgstr "Všetky moje budúce udalosti"
 #: modules/social_features/social_activity/social_activity.module:1
 #: modules/social_features/social_activity/config/install/views.view.activity_stream_notifications.yml:0
 msgid "All notifications"
-msgstr "Všetky oznámenia"
+msgstr "Všetky upozornenia"
 
 #: modules/social_features/social_topic/social_topic.module:116
 msgid "All statuses"
@@ -4218,7 +4218,7 @@ msgstr ""
 
 #: modules/social_features/social_group/modules/social_group_flexible_group/config/install/field.field.group.flexible_group.field_group_allowed_join_method.yml:0
 msgid "Allowed join method"
-msgstr ""
+msgstr "Spôsob pridania sa do skupiny"
 
 #: modules/custom/dropdown/config/schema/dropdown.schema.yml:0
 #: modules/custom/entity_access_by_field/config/schema/entity_access_by_field.schema.yml:0
@@ -4608,7 +4608,7 @@ msgstr "Automatické prihlásenie"
 
 #: modules/social_features/social_group/modules/social_group_flexible_group/config/install/field.field.group.flexible_group.field_group_allowed_visibility.yml:0
 msgid "Available content visibility"
-msgstr ""
+msgstr "Viditeľnosť obsahu skupiny"
 
 #: modules/social_features/social_event/social_event.module:948
 #: modules/social_features/social_event/modules/social_event_invite/social_event_invite.module:137
@@ -4953,11 +4953,11 @@ msgstr "Vybrať predvolenú hlavnú stránku"
 
 #: modules/social_features/social_group/modules/social_group_flexible_group/config/install/field.field.group.flexible_group.field_group_allowed_join_method.yml:0
 msgid "Choose how people can join this group."
-msgstr ""
+msgstr "Vyber, ako bude možné stať sa členom/kou skupiny."
 
 #: modules/social_features/social_group/modules/social_group_flexible_group/config/install/field.field.group.flexible_group.field_group_allowed_visibility.yml:0
 msgid "Choose the allowed visibility settings for the group content."
-msgstr ""
+msgstr "Vyber, pre koho bude skupina viditeľná."
 
 #: modules/social_features/social_group/modules/social_group_flexible_group/social_group_flexible_group.module:117
 msgid "Choose the visibility options allowed for the group content."
@@ -5062,7 +5062,7 @@ msgstr "Komentár"
 #: modules/social_features/social_comment/social_comment.module:43;317
 msgctxt "Comment Button"
 msgid "Comment"
-msgstr "Pridaj komentár"
+msgstr "Pridať komentár"
 
 #: modules/social_features/social_post/config/install/comment.type.post_comment.yml:0
 msgid "Comment on a post in the activity streams"
@@ -5614,7 +5614,7 @@ msgstr ""
 
 #: modules/social_features/social_activity/config/install/message.template.create_post_community.yml:0
 msgid "Create post in the community"
-msgstr ""
+msgstr "Vytvoriť príspevok v komunite"
 
 #: modules/social_features/social_activity/config/install/message.template.create_post_profile.yml:0
 msgid "Create post on profile"
@@ -5737,7 +5737,7 @@ msgstr ""
 #: modules/social_features/social_page/config/install/field.field.node.page.field_page_image.yml:0
 #: modules/social_features/social_topic/config/install/field.field.node.topic.field_topic_image.yml:0
 msgid "Crop your image to select which part of your image to show on display."
-msgstr ""
+msgstr "Orež obrázok a vyber, ktorú časť obrázka chceš mať zobrazenú."
 
 #: modules/social_features/social_follow_content/config/install/views.view.following.yml:0
 msgid "Current User"
@@ -7003,7 +7003,7 @@ msgstr "Vykonať úkon"
 #: modules/social_features/social_profile/config/install/taxonomy.vocabulary.expertise.yml:0
 #: modules/social_features/social_search/config/install/views.view.search_users.yml:0
 msgid "Expertise"
-msgstr "Posudok"
+msgstr "Špecializácia"
 
 #: modules/social_features/social_core/social_core.install:266
 #: modules/social_features/social_activity/config/optional/views.view.activity_stream.yml:0
@@ -7436,7 +7436,7 @@ msgstr ""
 
 #: modules/social_features/social_user/src/Form/SocialUserLoginForm.php:67
 msgid "Forgot password?"
-msgstr ""
+msgstr "Zabudol/a si heslo?"
 
 #: modules/social_features/social_profile/modules/social_profile_privacy/config/schema/social_profile_privacy.schema.yml:0
 msgid "Format"
@@ -7565,7 +7565,7 @@ msgstr ""
 #: modules/social_features/social_group/config/install/field.field.group.public_group.field_group_image.yml:0
 #: modules/social_features/social_group/modules/social_group_secret/config/install/field.field.group.secret_group.field_group_image.yml:0
 msgid "Group Image"
-msgstr ""
+msgstr "Obrázok skupiny"
 
 #: modules/social_features/social_group/config/install/views.view.group_information.yml:0
 msgid "Group Information"
@@ -7841,7 +7841,7 @@ msgstr ""
 
 #: modules/social_features/social_user/social_user.module:224
 msgid "Have an account already? @link"
-msgstr ""
+msgstr "Už máš účet? @link"
 
 #: modules/custom/sitewide_js/src/Form/SiteWideJSForm.php:51
 msgid "Header"
@@ -8259,7 +8259,7 @@ msgstr ""
 #: modules/social_features/social_group/social_group.module:698;955
 #: modules/social_features/social_group/modules/social_group_flexible_group/social_group_flexible_group.module:85
 msgid "Invite only"
-msgstr ""
+msgstr "Iba pozvať"
 
 #: modules/social_features/social_event/modules/social_event_invite/social_event_invite.routing.yml:0;0
 msgid "Invite people"
@@ -8277,7 +8277,7 @@ msgstr "Pozvánka(y) boli úspešne odoslané."
 #: modules/social_features/social_event/social_event.module:109;1161
 #: modules/social_features/social_event/config/install/field.storage.node.field_enroll_method.yml:0
 msgid "Invite-only"
-msgstr ""
+msgstr "Iba pre pozvaných"
 
 #: translations.php:47
 msgid ""
@@ -8311,7 +8311,7 @@ msgstr "Dátum pozvania"
 
 #: modules/social_features/social_group/modules/social_group_invite/config/optional/message.template.invited_to_join_group.yml:0
 msgid "Invited to join a group"
-msgstr ""
+msgstr "Pozvaný/á pridať sa do skupiny"
 
 #: modules/social_features/social_group/modules/social_group_invite/src/Plugin/ActivityContext/InvitedToGroupActivityContext.php:9
 msgid "Invited to join a group activity context"
@@ -8319,15 +8319,15 @@ msgstr ""
 
 #: modules/social_features/social_core/social_core.module:148;172;1
 msgid "Invites"
-msgstr ""
+msgstr "Pozvánky"
 
 #: modules/social_features/social_group/modules/social_group_invite/config/optional/views.view.social_group_user_invitations.yml:0
 msgid "Invites Overview"
-msgstr ""
+msgstr "Prehľad Pozvánok"
 
 #: modules/social_features/social_event/modules/social_event_invite/config/install/views.view.user_event_invites.yml:0
 msgid "Invites overview"
-msgstr ""
+msgstr "Prehľad pozvánok"
 
 #: modules/social_features/social_group/modules/social_group_invite/src/Form/SocialBulkGroupInvitation.php:364
 msgid "Inviting Members"
@@ -8492,15 +8492,15 @@ msgstr ""
 
 #: modules/social_features/social_core/config/install/crop.type.hero.yml:0
 msgid "Large"
-msgstr ""
+msgstr "Veľký/á"
 
 #: modules/social_features/social_core/config/install/crop.type.profile_large.yml:0
 msgid "Large sized profile image"
-msgstr ""
+msgstr "Vysokorozmerný profilový obrázok"
 
 #: modules/social_features/social_user/src/Plugin/GraphQL/DataProducer/QueryUser.php:10
 msgid "Last"
-msgstr ""
+msgstr "Posledný/á"
 
 #: modules/social_features/social_content_block/modules/social_event_content_block/config/install/field.storage.block_content.field_event_date.yml:0
 msgid "Last 14 days"
@@ -8582,7 +8582,7 @@ msgstr "Naposledy aktualizované"
 #: modules/social_features/social_topic/config/install/views.view.topics.yml:0
 #: modules/social_features/social_user/config/install/views.view.user_admin_people.yml:0
 msgid "Last »"
-msgstr "Koniec"
+msgstr "Koniec »"
 
 #: modules/social_features/social_topic/config/install/views.view.latest_topics.yml:0
 msgid "Latest group topics"
@@ -8603,11 +8603,11 @@ msgstr "Najnovšie témy \"block\""
 
 #: modules/social_features/social_topic/config/install/views.view.latest_topics.yml:0
 msgid "Latest topics group"
-msgstr ""
+msgstr "Skupina posledných tém"
 
 #: modules/social_features/social_topic/config/install/views.view.latest_topics.yml:0
 msgid "Latest topics page"
-msgstr ""
+msgstr "Stránka posledných tém"
 
 #: modules/social_features/social_activity/templates/message-post-teaser.html.twig:13
 msgid "Leave a comment"
@@ -8686,7 +8686,7 @@ msgstr ""
 
 #: modules/social_features/social_landing_page/src/Plugin/Field/FieldWidget/BlockFieldWidget.php:35
 msgid "Lists (Views)"
-msgstr ""
+msgstr "Zoznamy (Videnia)"
 
 #: modules/social_features/social_profile/src/Plugin/GraphQL/DataProducer/DefaultProfileLoad.php:14
 msgid "Load default profile"
@@ -8698,7 +8698,7 @@ msgstr ""
 
 #: modules/social_features/social_profile/src/Plugin/GraphQL/DataProducer/DefaultProfileLoad.php:14
 msgid "Loads the default profile for a user."
-msgstr ""
+msgstr "Nahrá východzí profil pre používateľa."
 
 #: modules/social_features/social_event/config/install/field.field.node.event.field_event_location.yml:0
 #: modules/social_features/social_group/config/install/field.field.group.closed_group.field_group_location.yml:0
@@ -8711,7 +8711,7 @@ msgstr "Názov lokality"
 
 #: modules/social_features/social_user/social_user.module:660
 msgid "Log In"
-msgstr "Prihlásenie"
+msgstr "Prihlásiť sa"
 
 #: modules/social_features/social_event/modules/social_event_an_enroll/templates/event-an-enroll-dialog.html.twig:11
 #: modules/social_features/social_event/src/Form/EnrollRequestAnonymousForm.php:52
@@ -8720,7 +8720,7 @@ msgstr "Prihlásenie"
 #: modules/social_features/social_user/src/Form/SocialUserLoginForm.php:105
 #: modules/social_features/social_user/src/Routing/RouteSubscriber.php:24
 msgid "Log in"
-msgstr "Prihlásenie"
+msgstr "Prihlás sa"
 
 #: modules/social_features/social_user/config/schema/social_user.schema.yml:0
 msgid "Log in Help Text"
@@ -8728,12 +8728,12 @@ msgstr ""
 
 #: modules/social_features/social_user/src/Form/SocialUserLoginForm.php:41
 msgid "Log in with <b>username</b> or <b>email</b>"
-msgstr ""
+msgstr "Prihlásiť sa pomocou <b>užívateľského mena</b> alebo <b>e-mailu</b>"
 
 #: modules/social_features/social_core/social_core.install:242
 #: modules/social_features/social_event/modules/social_event_an_enroll/templates/event-an-enroll-dialog.html.twig:11
 msgid "Login"
-msgstr ""
+msgstr "Prihlás sa"
 
 #: modules/social_features/social_user/social_user.module:730
 msgid "Login and Registration help texts"
@@ -8760,7 +8760,7 @@ msgstr "Logo"
 
 #: modules/social_features/social_user/social_user.module:545;547
 msgid "Logout"
-msgstr "Odhlásenie"
+msgstr "Odhlásiť"
 
 #: modules/custom/mentions/src/MentionsConfigListBuilder.php:24
 #: modules/custom/social_queue_storage/src/QueueStorageEntityTypeListBuilder.php:18
@@ -8833,7 +8833,7 @@ msgstr "Spravovať všetky skupiny"
 
 #: modules/social_features/social_event/modules/social_event_managers/src/Plugin/views/access/ManageByOrganizersOnlyAccess.php:9
 msgid "Manage by organizers only"
-msgstr ""
+msgstr "Spravovať iba organizátormi"
 
 #: modules/social_features/social_event/modules/social_event_an_enroll/src/Plugin/views/access/ManageEnrollmentAccess.php:9
 msgid "Manage enrollment access"
@@ -8861,11 +8861,11 @@ msgstr "Spravovať žiadosti o prihlásenie sa na udalosť"
 
 #: modules/social_features/social_post/social_post.links.menu.yml:0
 msgid "Manage form and displays settings of posts"
-msgstr ""
+msgstr "Spravovať formu a zobraziť nastavenia príspevkov"
 
 #: modules/social_features/social_group/social_group.module:1329
 msgid "Manage members"
-msgstr "Spravovať členov"
+msgstr "Spravovať členov/ky"
 
 #: modules/social_features/social_event/config/install/views.view.event_manage_enrollment_requests.yml:0
 #: modules/social_features/social_event/modules/social_event_invite/config/install/views.view.event_manage_enrollment_invites.yml:0
@@ -8930,19 +8930,19 @@ msgstr ""
 
 #: modules/social_features/social_event/modules/social_event_max_enroll/social_event_max_enroll.links.menu.yml:0
 msgid "Maximum Event Enrollment"
-msgstr ""
+msgstr "Maximum prihlásení na udalosť"
 
 #: modules/social_features/social_event/modules/social_event_max_enroll/social_event_max_enroll.routing.yml:0
 msgid "Maximum Event Enrollment settings"
-msgstr ""
+msgstr "Nastavenie maxima prihlásení na udalosť"
 
 #: modules/social_features/social_event/modules/social_event_max_enroll/src/Form/EventMaxEnrollSettingsForm.php:44
 msgid "Maximum event enrollments field is required"
-msgstr ""
+msgstr "Je potrebné pole Maximum prihlásení na udalosť"
 
 #: modules/social_features/social_event/modules/social_event_max_enroll/config/install/field.field.node.event.field_event_max_enroll_num.yml:0
 msgid "Maximum number of enrollees"
-msgstr ""
+msgstr "Maximálny počet prihlásených"
 
 #: modules/custom/download_count/src/Form/DownloadCountSettingsForm.php:55
 msgid ""
@@ -8980,7 +8980,7 @@ msgstr "Člen/ka"
 #: modules/social_features/social_group/modules/social_group_invite/config/optional/views.view.social_group_invitations.yml:0
 #: modules/social_features/social_group/modules/social_group_invite/config/optional/views.view.social_group_user_invitations.yml:0
 msgid "Member account"
-msgstr ""
+msgstr "Účet člena"
 
 #: modules/social_features/social_user/config/install/views.view.user_admin_people.yml:0
 msgid "Member for"
@@ -8993,7 +8993,7 @@ msgstr "Členovia/ky"
 
 #: modules/social_features/social_group/src/Plugin/views/field/SocialGroupViewsBulkOperationsBulkForm.php:141
 msgid "Members excluded on other pages:"
-msgstr ""
+msgstr "Členovia vylúčení na iných stránkach:"
 
 #: modules/social_features/social_group/src/Controller/SocialGroupController.php:89
 msgid "Members of @name"
@@ -9013,14 +9013,14 @@ msgstr ""
 
 #: modules/social_features/social_group/modules/social_group_request/src/Controller/GroupRequestController.php:185
 msgid "Membership has been successfully denied."
-msgstr ""
+msgstr "Členstvo bolo úspešne zamietnuté."
 
 #: modules/social_features/social_group/modules/social_group_invite/config/optional/block.block.membershipinvitenotification.yml:0
 #: modules/social_features/social_group/modules/social_group_invite/config/optional/block.block.membershipinvitenotification_2.yml:0
 #: modules/social_features/social_group/modules/social_group_invite/config/optional/block.block.membershipinvitenotification_3.yml:0
 #: modules/social_features/social_group/modules/social_group_invite/config/optional/block.block.membershipinvitenotification_4.yml:0
 msgid "Membership invite notification"
-msgstr ""
+msgstr "Notifikácia pozvánky na členstvo"
 
 #: modules/social_features/social_group/modules/social_group_request/social_group_request.module:92
 msgid "Membership request approved"
@@ -9038,7 +9038,7 @@ msgstr "Žiadosti o členstvo"
 #: modules/social_features/social_group/modules/social_group_request/config/optional/block.block.membershiprequestsnotification.yml:0
 #: modules/social_features/social_group/modules/social_group_request/config/optional/block.block.membershiprequestsnotification_2.yml:0
 msgid "Membership requests notification"
-msgstr ""
+msgstr "Notifikácia žiadostí na členstvo"
 
 #: modules/custom/mentions/mentions.routing.yml:0
 #: modules/custom/mentions/config/schema/mentions.schema.yml:0
@@ -9069,7 +9069,7 @@ msgstr ""
 
 #: modules/social_features/social_mentions/src/Plugin/ActivityEntityCondition/MentionPostActivityEntityCondition.php:7
 msgid "Mention in a post"
-msgstr ""
+msgstr "Spomenutie v príspevku"
 
 #: modules/custom/mentions/src/MentionsViewsData.php:89
 msgid "Mentioned user uid"
@@ -9084,22 +9084,22 @@ msgstr "Zmienky"
 
 #: modules/custom/mentions/src/Plugin/Filter/MentionsFilter.php:18
 msgid "Mentions Filter"
-msgstr ""
+msgstr "Filter spomenutí"
 
 #: modules/custom/mentions/config/schema/mentions.schema.yml:0
 msgid "Mentions Filter settings"
-msgstr ""
+msgstr "Nastavenia filtra spomenutí"
 
 #: modules/custom/mentions/config/schema/mentions.schema.yml:0
 msgid "Mentions Settings"
-msgstr ""
+msgstr "Nastavenia spomenutí"
 
 #: modules/custom/mentions/mentions.links.menu.yml:0
 #: modules/custom/mentions/mentions.routing.yml:0;0
 #: modules/custom/mentions/config/schema/mentions.schema.yml:0;0
 #: modules/custom/mentions/src/Entity/MentionsType.php:7
 msgid "Mentions Type"
-msgstr ""
+msgstr "Typ spomenutí"
 
 #: modules/custom/mentions/src/Form/MentionsSettingsForm.php:75
 msgid "Mentions entity will be created only for selected entity types."
@@ -9111,15 +9111,15 @@ msgstr ""
 
 #: modules/social_features/social_mentions/src/Plugin/ActivityEntityCondition/MentionCommentActivityEntityCondition.php:7
 msgid "Mentions in a comment"
-msgstr ""
+msgstr "Spomenutia v komentári"
 
 #: modules/custom/mentions/mentions.links.menu.yml:0
 msgid "Mentions settings"
-msgstr ""
+msgstr "Nastavenia spomenutí"
 
 #: modules/custom/mentions/src/Plugin/Filter/MentionsFilter.php:283
 msgid "Mentions types"
-msgstr ""
+msgstr "Typy spomenutí"
 
 #: modules/custom/mentions/src/MentionsViewsData.php:84;96
 msgid "Mentions user"
@@ -9187,19 +9187,19 @@ msgstr ""
 
 #: modules/custom/social_lets_connect/modules/social_lets_connect_usage/src/Plugin/ShareUsageDataPlugin/ModulesInstalled.php:7
 msgid "Modules installed"
-msgstr ""
+msgstr "Nainštalované moduly"
 
 #: modules/social_features/social_content_block/config/install/field.storage.block_content.field_sorting.yml:0
 msgid "Most commented"
-msgstr ""
+msgstr "Najviac komentovaný"
 
 #: modules/social_features/social_content_block/config/install/field.storage.block_content.field_sorting.yml:0
 msgid "Most liked"
-msgstr ""
+msgstr "Najviac páčiaci sa"
 
 #: modules/social_features/social_activity/config/install/message.template.moved_content_between_groups.yml:0
 msgid "Moved event or topic between groups"
-msgstr ""
+msgstr "Posunul/a udalosť alebo tému medzi skupinami"
 
 #: modules/social_features/social_group/src/Plugin/Field/FieldWidget/SocialGroupSelectorWidget.php:199
 msgid ""
@@ -9231,7 +9231,7 @@ msgstr "Moja žiadosť o členstvo v skupine je schválená"
 
 #: modules/social_features/social_group/social_group.module:2126
 msgid "My groups"
-msgstr "Moja skupina"
+msgstr "Moje skupiny"
 
 #: modules/social_features/social_profile/social_profile.module:788
 msgid "My profile"
@@ -9247,7 +9247,7 @@ msgstr "Moje budúce udalosti"
 
 #: modules/social_features/social_event/config/install/views.view.upcoming_events.yml:0;0
 msgid "My upcoming events block"
-msgstr ""
+msgstr "Blok mojich nadchádzajúcich udalostí"
 
 #: modules/custom/activity_creator/src/ActivityListBuilder.php:23
 #: modules/custom/mentions/config/schema/mentions.schema.yml:0
@@ -9268,7 +9268,7 @@ msgstr "Meno alebo email obsahujú"
 
 #: translations.php:70
 msgid "Names and profile image"
-msgstr ""
+msgstr "Mená a profilový obrázok"
 
 #: modules/social_features/social_user/social_user.links.menu.yml:0
 #: modules/social_features/social_user/social_user.routing.yml:0
@@ -9326,11 +9326,11 @@ msgstr "Najnovšie skupiny"
 
 #: modules/social_features/social_group/config/install/views.view.newest_groups.yml:0;0
 msgid "Newest groups block"
-msgstr ""
+msgstr "Blok najnovších skupín"
 
 #: modules/social_features/social_group/config/install/views.view.newest_groups.yml:0
 msgid "Newest groups page"
-msgstr ""
+msgstr "Stránka najnovších skupín"
 
 #: modules/social_features/social_profile/config/install/views.view.newest_users.yml:0;0
 msgid "Newest members"
@@ -9347,15 +9347,15 @@ msgstr "Najnovší používatelia"
 
 #: modules/social_features/social_profile/config/install/views.view.newest_users.yml:0;0
 msgid "Newest users block"
-msgstr ""
+msgstr "Blok najnovších užívateľov"
 
 #: modules/social_features/social_profile/config/install/views.view.newest_users.yml:0
 msgid "Newest users page"
-msgstr ""
+msgstr "Stránka najnovších používateľov"
 
 #: modules/social_features/social_topic/social_topic.install:37;370
 msgid "News"
-msgstr ""
+msgstr "Novinky"
 
 #: modules/social_features/social_content_block/modules/social_event_content_block/config/install/field.storage.block_content.field_event_date.yml:0
 msgid "Next 14 days"
@@ -9391,7 +9391,7 @@ msgstr "Najbližší mesiac"
 #: modules/social_features/social_topic/config/install/views.view.topics.yml:0
 #: modules/social_features/social_user/config/install/views.view.user_admin_people.yml:0
 msgid "Next ›"
-msgstr "Ďalej"
+msgstr "Ďalej ›"
 
 #: modules/social_features/social_profile/modules/social_profile_fields/src/Plugin/UserExportPlugin/UserNickName.php:23;8
 #: modules/social_features/social_profile/modules/social_profile_fields/config/install/field.field.profile.profile.field_profile_nick_name.yml:0
@@ -9449,24 +9449,24 @@ msgstr "Zatiaľ tu nie sú žiadne označenia \"Páči sa mi\""
 
 #: modules/social_features/social_content_block/src/ContentBuilder.php:199
 msgid "No matching content found"
-msgstr ""
+msgstr "Nenašiel sa žiadny zodpovedajúci obsah"
 
 #: modules/social_features/social_group/config/install/views.view.group_members.yml:0;0
 msgid "No members in this group"
-msgstr ""
+msgstr "Žiadni členovia v tejto skupine"
 
 #: modules/social_features/social_event/modules/social_event_invite/config/install/views.view.event_manage_enrollment_invites.yml:0
 msgid "No one has been invited for this event yet."
-msgstr ""
+msgstr "Zatiaľ nebol nikto pozvaný na túto udalosť."
 
 #: modules/social_features/social_event/config/install/views.view.event_enrollments.yml:0
 #: modules/social_features/social_event/modules/social_event_managers/config/install/views.view.event_manage_enrollments.yml:0
 msgid "No one has enrolled for this event"
-msgstr ""
+msgstr "Nikto sa neprihlásil na túto udalosť"
 
 #: modules/social_features/social_event/modules/social_event_an_enroll/config/install/views.view.manage_enrollments.yml:0
 msgid "No one has enrolled for this event as anonymous user"
-msgstr ""
+msgstr "Nikto sa neprihlásil na túto udalosť ako anonymný užívateľ"
 
 #: modules/social_features/social_event/config/install/views.view.event_manage_enrollment_requests.yml:0
 msgid "No one has requested to be enrolled for this event yet."
@@ -9596,7 +9596,7 @@ msgstr "Počet komentárov"
 
 #: modules/social_features/social_featured_content/templates/group--featured.html.twig:89
 msgid "Number of group members"
-msgstr "Počet členov skupiny"
+msgstr "Počet členov/iek skupiny"
 
 #: modules/social_features/social_content_block/config/install/field.field.block_content.custom_content_list.field_item_amount.yml:0
 msgid "Number of items"
@@ -9612,11 +9612,13 @@ msgstr "Počet členov"
 
 #: modules/custom/download_count/src/Form/DownloadCountSettingsForm.php:62
 msgid "Number of seconds in the time window for counting a file download."
-msgstr ""
+msgstr "Počet sekúnd v časovom okne pre počítanie času sťahovania súboru."
 
 #: modules/custom/activity_send/src/Form/ActivitySendSettingsForm.php:44
 msgid "Number of seconds of inactivity after which we assume user is offline."
 msgstr ""
+"Počet sekúnd nečinnosti, po uplynutí ktorých predpokladáme, že používateľ je "
+"offline."
 
 #: modules/custom/mentions/config/schema/mentions.schema.yml:0
 #: modules/custom/mentions/src/Form/MentionsSettingsForm.php:79
@@ -9727,7 +9729,7 @@ msgstr[2] ""
 #: modules/social_features/social_event/social_event.module:309
 #: modules/social_features/social_content_block/modules/social_event_content_block/config/install/field.storage.block_content.field_event_date.yml:0
 msgid "Ongoing"
-msgstr ""
+msgstr "Prebiehajúca"
 
 #: modules/social_features/social_event/src/Plugin/views/filter/EventDate.php:91
 #: modules/social_features/social_event/config/install/views.view.events.yml:0
@@ -9738,7 +9740,7 @@ msgstr "Prebiehajúce a budúce udalosti"
 
 #: modules/social_features/social_mentions/social_mentions.module:180
 msgid "Only full name (first and last)"
-msgstr ""
+msgstr "Iba celé meno (Krstné a priezvisko)"
 
 #: modules/social_features/social_group/social_group.module:612
 msgid "Only group members can see this group"
@@ -9750,12 +9752,12 @@ msgstr "Túto skupinu vidia iba prihlásení členovia/ky"
 
 #: modules/social_features/social_event/src/Form/EventSettingsForm.php:66
 msgid "Only show street and postal code to event enrolees"
-msgstr ""
+msgstr "Ukázať ulicu a poštové smerovacie číslo iba prihláseným na event"
 
 #: modules/social_features/social_group/config/schema/social_group.schema.yml:0
 #: modules/social_features/social_group/src/Form/SocialGroupSettings.php:47
 msgid "Only show the group address to the group members"
-msgstr ""
+msgstr "Ukázať adresu skupiny iba členom skupiny"
 
 #: modules/social_features/social_mentions/social_mentions.module:179
 msgid "Only username"
@@ -9765,8 +9767,9 @@ msgstr "Iba priezvisko"
 #: modules/custom/social_lets_connect/social_lets_connect.links.menu.yml:0
 #: modules/custom/social_lets_connect/social_lets_connect.routing.yml:0
 #: modules/social_features/social_swiftmail/social_swiftmail.module:70
+#, fuzzy
 msgid "Open Social"
-msgstr ""
+msgstr "Open Social"
 
 #: modules/social_features/social_swiftmail/config/schema/social_swiftmail.schema.yml:0
 #: modules/social_features/social_swiftmail/src/Form/SocialSwiftmailSettingsForm.php:179
@@ -9777,7 +9780,7 @@ msgstr ""
 #: modules/social_features/social_core/social_core.links.menu.yml:0
 #: modules/social_features/social_core/social_core.routing.yml:0
 msgid "Open Social Settings"
-msgstr ""
+msgstr "Nastavenia Open Social"
 
 #: modules/social_features/social_core/social_core.install:51
 msgid "Open Social Update Version"
@@ -9785,12 +9788,12 @@ msgstr ""
 
 #: social.info.yml:0
 msgid "Open Social install profile."
-msgstr ""
+msgstr "Open Social inštalačný profil."
 
 #: modules/custom/social_lets_connect/modules/social_lets_connect_usage/src/Form/LetsConnectUsageSettingsForm.php:46
 #: modules/custom/social_lets_connect/modules/social_lets_connect_usage/src/Plugin/ShareUsageDataPlugin/OpenSocialVersion.php:7
 msgid "Open Social version"
-msgstr ""
+msgstr "Verzia Open Social"
 
 #: modules/custom/social_lets_connect/modules/social_lets_connect_usage/src/Form/LetsConnectUsageSettingsForm.php:33
 msgid ""
@@ -9834,6 +9837,8 @@ msgstr ""
 #: translations.php:50
 msgid "Open to join - users can join this group without approval"
 msgstr ""
+"Otvorený vstup - používatelia/ky sa môžu pridať do skupiny bez potreby "
+"schválenia"
 
 #: modules/social_features/social_event/config/install/views.view.event_manage_enrollment_requests.yml:0
 #: modules/social_features/social_event/modules/social_event_invite/config/install/views.view.event_manage_enrollment_invites.yml:0
@@ -10124,7 +10129,7 @@ msgstr "Oprávnenie"
 
 #: modules/social_features/social_landing_page/src/Plugin/Field/FieldWidget/BlockFieldWidget.php:41
 msgid "Personalised activity stream"
-msgstr ""
+msgstr "Prispôsobená časová os aktivity"
 
 #: modules/social_features/social_landing_page/src/Plugin/Field/FieldWidget/BlockFieldWidget.php:42
 msgid "Personalised activity stream (with post form)"
@@ -10153,7 +10158,7 @@ msgstr ""
 
 #: modules/social_features/social_core/config/install/block_content.type.platform_intro.yml:0
 msgid "Platform introduction"
-msgstr ""
+msgstr "Predstavenie platformy"
 
 #: modules/social_features/social_core/config/install/block_content.type.platform_intro.yml:0
 msgid "Platform introduction block, meant for use in content regions."
@@ -10175,6 +10180,9 @@ msgid ""
 "Please choose which profile fields can be displayed in user profiles. Site "
 "managers can always see all the filled-in profile information."
 msgstr ""
+"Vyber prosím polia profilu, ktoré môžu byť zobrazené v profiloch "
+"používateľov. Správcovia stránok môžu vždy vidieť všetky v profile vyplnené "
+"informácie."
 
 #: modules/social_features/social_content_report/config/install/field.field.flagging.report_comment.field_other_reason.yml:0
 #: modules/social_features/social_content_report/config/install/field.field.flagging.report_node.field_other_reason.yml:0
@@ -10944,7 +10952,7 @@ msgstr "Prečítať viac"
 
 #: modules/social_features/social_activity/templates/message-node-teaser.html.twig:5
 msgid "Read more about this"
-msgstr "Prečítať viac"
+msgstr "Prečítať viac o tejto"
 
 #: modules/social_features/social_content_block/config/install/field.field.block_content.custom_content_list.field_link.yml:0
 #: modules/social_features/social_core/config/install/field.field.block_content.basic.field_basic_link.yml:0
@@ -10953,7 +10961,7 @@ msgstr ""
 
 #: modules/social_features/social_core/social_core.module:250
 msgid "Read more<span class=\"visually-hidden\"> about @title</span>"
-msgstr "Čítať viac<span class=\"visually-hidden\"> o @title</span>"
+msgstr "Prečítať viac<span class=\"visually-hidden\"> o @title</span>"
 
 #: modules/social_features/social_content_report/config/install/field.field.flagging.report_comment.field_reason.yml:0
 #: modules/social_features/social_content_report/config/install/field.field.flagging.report_node.field_reason.yml:0
@@ -11826,7 +11834,7 @@ msgstr "Poslať"
 
 #: modules/social_features/social_group/modules/social_group_welcome_message/social_group_welcome_message.module:23
 msgid "Send a welcome message to new group members"
-msgstr "Poslať uvítaciu správu novým členom skupiny"
+msgstr "Poslať uvítaciu správu novým členom/kám skupiny"
 
 #: modules/social_features/social_user/src/Plugin/Action/SocialSendEmail.php:251
 msgid "Send an email to :selected_count members"
@@ -11913,6 +11921,8 @@ msgid ""
 "Set a limit for event enrollments. Users are not able to enroll once the "
 "maximum number of enrollees is reached."
 msgstr ""
+"Nastaviť limit pre prihlásenie sa na udalosť. Používatelia sa nemôžu "
+"prihlásiť po dosiahnutí maximálneho počtu prihlásených osôb."
 
 #: modules/social_features/social_event/modules/social_event_max_enroll/config/install/field.field.node.event.field_event_max_enroll.yml:0
 msgid "Set a limit to number of enrollees"
@@ -11925,11 +11935,11 @@ msgstr ""
 
 #: modules/social_features/social_event/modules/social_event_managers/src/Form/SocialEventManagersSettings.php:40
 msgid "Set author of event as event organiser automatically."
-msgstr ""
+msgstr "Automaticky nastaviť autora udalosti ako organizátora udalosti."
 
 #: translations.php:37
 msgid "Set wether event types field is required or not."
-msgstr ""
+msgstr "Nastaviť, či je pole typov udalostí povinné alebo nie."
 
 #: translations.php:39
 msgid "Set wether the tour is enabled or not."
@@ -11949,7 +11959,7 @@ msgstr ""
 
 #: modules/social_features/social_user/src/Routing/RouteSubscriber.php:34
 msgid "Set your password"
-msgstr ""
+msgstr "Nastav si svoje heslo"
 
 #: modules/custom/activity_creator/activity_creator.links.task.yml:0
 #: modules/custom/social_font/social_font.links.task.yml:0
@@ -12081,7 +12091,7 @@ msgstr ""
 
 #: modules/custom/social_tour/social_tour.module:33
 msgid "Show tips on how to use the community"
-msgstr ""
+msgstr "Zobraziť tipy na používanie"
 
 #: modules/social_features/social_event/config/install/views.view.upcoming_events.yml:0
 msgid "Show upcoming events (my, community and overview)"
@@ -12097,7 +12107,7 @@ msgstr ""
 
 #: modules/social_features/social_user/social_user.module:653
 msgid "Sign Up"
-msgstr "Registrácia"
+msgstr "Zaregistruj sa"
 
 #: modules/social_features/social_core/social_core.install:238
 #: modules/social_features/social_event/src/Form/EnrollRequestAnonymousForm.php:38
@@ -12106,11 +12116,11 @@ msgstr "Registrácia"
 #: modules/social_features/social_user/src/Form/SocialUserLoginForm.php:93
 #: modules/social_features/social_user/src/Form/SocialUserPasswordForm.php:44
 msgid "Sign up"
-msgstr "Registrácia"
+msgstr "Zaregistruj sa"
 
 #: modules/social_features/social_user/social_user.module:189
 msgid "Sign up with <b>email</b>"
-msgstr "Registrácia s <b>email</b>"
+msgstr "Registrácia s <b>emailom</b>"
 
 #: modules/social_features/social_user/src/Plugin/Block/AccountHeaderBlock.php:194
 msgid "Signed in as"
@@ -13300,7 +13310,7 @@ msgstr ""
 
 #: modules/social_features/social_core/social_core.module:763
 msgid "The URL alias allows you to customise the link to this page."
-msgstr ""
+msgstr "Tu môžeš zmeniť link URL adresy."
 
 #: modules/social_features/social_core/social_core.module:690
 msgid "The URL alias must be a relative URL."
@@ -13869,7 +13879,7 @@ msgstr ""
 
 #: modules/social_features/social_featured_content/templates/node--featured.html.twig:156;161
 msgid "The visibility of this content is set to @visibility_label"
-msgstr ""
+msgstr "Viditeľnosť obsahu je nastavená ako @visibility_label"
 
 #: modules/social_features/social_profile/modules/social_profile_privacy/social_profile_privacy.install:244
 msgid "The visibility option for no one field has been changed."
@@ -14980,8 +14990,8 @@ msgid ""
 "password. Welcome to Open Social! With this platform you can collaborate "
 "with like minded people within the community!"
 msgstr ""
-"Vitaj [current-user:display-name]. Úspešne si si vytvoril heslo. Vitaj na "
-"Open Social! Vďaka tejto platforme môžeš spolupracovať s rovnako "
+"Vitaj [current-user:display-name]. Tvoje heslo bolo úspešne vytvorené. Vitaj "
+"na Open Social! Vďaka tejto platforme môžeš spolupracovať s rovnako "
 "zmýšľajúcimi ľuďmi v komunite!"
 
 #: modules/social_features/social_group/modules/social_group_welcome_message/src/SocialGroupWelcomeMessageConfigOverride.php:77
@@ -15639,7 +15649,7 @@ msgstr ""
 #: modules/social_features/social_topic/config/install/views.view.latest_topics.yml:0
 #: modules/social_features/social_topic/config/install/views.view.topics.yml:0
 msgid "ascending"
-msgstr "vzostupný"
+msgstr "Vzostupne"
 
 #: config/install/views.view.content.yml:0
 msgid "author"
@@ -15687,7 +15697,7 @@ msgstr ""
 #: modules/social_features/social_topic/config/install/views.view.latest_topics.yml:0
 #: modules/social_features/social_topic/config/install/views.view.topics.yml:0
 msgid "descending"
-msgstr "zostupný"
+msgstr "Zostupne"
 
 #: modules/custom/activity_send/modules/activity_send_email/src/Plugin/EmailFrequency/Immediately.php:65
 #: modules/custom/activity_send/modules/activity_send_email/src/Plugin/QueueWorker/ActivityDigestWorker.php:175
