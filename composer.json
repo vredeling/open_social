@@ -76,9 +76,6 @@
                 "Ensure field definition allowed values callbacks are used for field filter callbacks": "https://www.drupal.org/files/issues/2020-06-03/2949022-12--views_filter_options_callback.patch",
                 "Selecting the same day in a date between filter returns no results": "https://www.drupal.org/files/issues/2021-05-05/date_between_2842409_2_d8.patch"
             },
-            "drupal/block_field": {
-                "Add pre-render hooks to be able to alter content": "https://www.drupal.org/files/issues/2019-11-17/2978883-block-field-alter-hooks-4.patch"
-            },
             "drupal/url_embed": {
                 "Translate dialog title": "https://www.drupal.org/files/issues/2018-03-16/url_embed_translate_dialog_title-2953591-2.patch",
                 "Improve how the module deals with non-embeddable URLs & WSODs (See: https://www.drupal.org/project/social/issues/2930457#comment-13973067)": "https://www.drupal.org/files/issues/2021-01-22/urlembed-non-embeddable-urls-2761187-opensocial-combined-21.patch"
@@ -112,7 +109,7 @@
         "drupal/advancedqueue": "^1.0@RC",
         "drupal/ajax_comments": "^1.0",
         "drupal/better_exposed_filters": "^5.0",
-        "drupal/block_field": "^1.0",
+        "drupal/block_field": "^1.0@RC",
         "drupal/config_update": "^1.7",
         "drupal/crop": "1.5",
         "drupal/csv_serialization": "^2.0",
