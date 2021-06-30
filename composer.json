@@ -69,7 +69,7 @@
             "drupal/private_message": {
                 "Issue when saving members.": "https://www.drupal.org/files/issues/2019-11-23/issue-member-save-3096352-2.patch",
                 "Own send messages are shown as new messages": "https://www.drupal.org/files/issues/2019-02-05/private_message-message_count-2977310-8_0.patch",
-                "Notice: Undefined offset: 0 in Drupal\\private_message\\Form\\PrivateMessageForm->validateMembers()": "https://www.drupal.org/files/issues/2020-07-01/private_message_unknown_user_target-3156194-02.patch"
+                "Notice: Undefined offset: 0 in Drupal\\private_message\\Form\\PrivateMessageForm->validateMembers()": "https://www.drupal.org/files/issues/2020-08-12/private_message_unknown_user_target-3156194-03.patch"
             },
             "drupal/r4032login": {
                 "r4032login should perform access check for /user/login as anonymous user": "https://www.drupal.org/files/issues/2018-11-01/3010747-3-perform-access-check-as-an-user.patch"
